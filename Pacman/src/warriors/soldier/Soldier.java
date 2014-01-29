@@ -10,4 +10,5 @@ public interface Soldier {
 	String toString();
 	String getName();
 	void accept(WarriorsVisitor visitor);
+	int getSightRange();
 }

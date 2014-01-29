@@ -1,6 +1,7 @@
 package warriors.observers;
 
 import warriors.army.Unit;
+import warriors.entity.GameSoldier;
 
 public class FightObserver implements Observer {
 
@@ -24,5 +25,8 @@ public class FightObserver implements Observer {
 	public String getLogs(){
 		return fightLog.toString();
 	}
+
+	@Override
+	public void moved(GameSoldier soldier) {}
 	
 }

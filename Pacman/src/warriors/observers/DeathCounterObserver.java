@@ -1,6 +1,7 @@
 package warriors.observers;
 
 import warriors.army.Unit;
+import warriors.entity.GameSoldier;
 
 public class DeathCounterObserver implements Observer {
 
@@ -20,6 +21,9 @@ public class DeathCounterObserver implements Observer {
 	public int getNbDeaths() {
 		return NbDeaths;
 	}
+
+	@Override
+	public void moved(GameSoldier soldier) {}
 	
 
 }

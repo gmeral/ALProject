@@ -3,6 +3,7 @@ package warriors.proxy;
 import java.lang.reflect.InvocationTargetException;
 
 import warriors.army.AbstractObservableUnit;
+import warriors.entity.GameSoldier;
 import warriors.soldier.DeadSoldierException;
 import warriors.soldier.Soldier;
 import warriors.visitor.WarriorsVisitor;
@@ -21,6 +22,10 @@ public class SoldierProxy extends AbstractObservableUnit {
 		soldier = s;
 	}
 
+	public void notifyMove(GameSoldier gs){
+		super.notifyMove(gs);
+	}
+	
 	@Override
 	public int parry(int damages) throws DeadSoldierException{
 		int damageReduced = 0;
@@ -131,6 +136,11 @@ public class SoldierProxy extends AbstractObservableUnit {
 			else
 				((ArmedSoldier)father).setSoldier(((ArmedSoldier)iterator).getSoldier());
 		}
+	}
+
+	@Override
+	public int getSightRange() {
+		return soldier.getSightRange();
 	}
 
 }

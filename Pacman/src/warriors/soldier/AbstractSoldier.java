@@ -6,18 +6,22 @@ abstract class AbstractSoldier implements Soldier {
 
 	private int strength;
 	private int healthPoints;
+	private int sightRange;
 	private String name;
 	static protected int peonID = 0;
+	public static final int INITIAL_SIGHTRANGE = 3;
 	
 	protected AbstractSoldier(int str, int hp) {
 		strength = str;
 		healthPoints = hp;
+		sightRange = INITIAL_SIGHTRANGE;
 	}
 		
 	protected AbstractSoldier(String s,int str, int hp) {
 		name = s;
 		strength = str;
 		healthPoints = hp;
+		sightRange = INITIAL_SIGHTRANGE;
 	}
 	
 	public int parry(int damages) throws DeadSoldierException {
@@ -49,5 +53,8 @@ abstract class AbstractSoldier implements Soldier {
 	public String getName() {
 		return name;
 	}
-
+	
+	public int getSightRange() {
+		return sightRange;
+	}
 }

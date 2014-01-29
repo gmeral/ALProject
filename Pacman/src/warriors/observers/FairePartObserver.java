@@ -1,6 +1,7 @@
 package warriors.observers;
 
 import warriors.army.Unit;
+import warriors.entity.GameSoldier;
 
 public class FairePartObserver implements Observer {
 
@@ -15,6 +16,9 @@ public class FairePartObserver implements Observer {
 		String name= u.getName();
 		System.out.println(name + " vient de mourir");
 	}
+
+	@Override
+	public void moved(GameSoldier soldier) {}
 
 
 

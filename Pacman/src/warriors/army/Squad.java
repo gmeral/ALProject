@@ -114,4 +114,14 @@ public class Squad extends AbstractObservableUnit {
 		return name;
 	}
 
+	@Override
+	public int getSightRange() {
+		int range = 0;
+		for (int i=0 ; i<Units.size() ; i++){
+			if(Units.get(i).getSightRange() > range)
+				range = Units.get(i).getSightRange();
+		}
+		return range;
+	}
+
 }

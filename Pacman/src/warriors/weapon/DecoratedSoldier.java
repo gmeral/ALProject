@@ -16,7 +16,10 @@ abstract class DecoratedSoldier implements Soldier, ArmedSoldier{
 	public void setSoldier(Soldier soldier) {
 		this.soldier = soldier;
 	}
-
+	
+	public int getSightRange() {
+		return soldier.getSightRange();
+	}
 
 	protected Weapon item;
 	protected int weaponHealth;

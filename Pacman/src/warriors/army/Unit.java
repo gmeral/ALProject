@@ -10,6 +10,7 @@ public interface Unit {
 	//Soldier interface
 	int parry(int damages) throws DeadSoldierException;
 	int strike();
+	int getSightRange();
 	String toString();
 	String getName();
 
