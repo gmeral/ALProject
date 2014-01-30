@@ -21,10 +21,6 @@ public class SoldierProxy extends AbstractObservableUnit {
 	public SoldierProxy(Soldier s){
 		soldier = s;
 	}
-
-	public void notifyMove(GameSoldier gs){
-		super.notifyMove(gs);
-	}
 	
 	@Override
 	public int parry(int damages) throws DeadSoldierException{
@@ -51,7 +47,7 @@ public class SoldierProxy extends AbstractObservableUnit {
 			soldier = e.nextItem();
 			dmg = strike();
 		}
-		notifyStrike(dmg);
+		//notifyStrike(dmg);
 		return dmg;
 	}
 

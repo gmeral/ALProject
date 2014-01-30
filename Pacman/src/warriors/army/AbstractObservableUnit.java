@@ -23,7 +23,13 @@ public abstract class AbstractObservableUnit implements Unit {
 			o.strikeDone(this,strength);
 		}
 	}
-
+	
+	public void notifyStrike(GameSoldier soldier, int strength) {
+		List <Observer> copy = new ArrayList<Observer>(observers);
+		for (Observer o : copy){
+			o.strikeDone(soldier,strength);
+		}
+	}
 
 
 	protected void notifyParry(int damageReduced) {
@@ -33,7 +39,7 @@ public abstract class AbstractObservableUnit implements Unit {
 		}
 	}
 
-	protected void notifyMove(GameSoldier gs){
+	public void notifyMove(GameSoldier gs){
 		List <Observer> copy = new ArrayList<Observer>(observers);
 		for (Observer o : copy){
 			o.moved(gs);

@@ -9,7 +9,7 @@ import warriors.weapon.TooManyItemsException;
 
 public class SwordBonus extends AbstractBonus {
 	public SwordBonus(Canvas canvas, int x, int y) {
-		super(canvas, x, y, new DrawableImage("images/superpacgum.gif", canvas)); //TODO image d'épée
+		super(canvas, x, y, new DrawableImage("images/sword.gif", canvas)); //TODO image d'épée
 	}
 	
 

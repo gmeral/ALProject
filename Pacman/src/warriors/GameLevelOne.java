@@ -22,8 +22,7 @@ import warriors.entity.HolyGrailBonus;
 import warriors.entity.ShieldBonus;
 import warriors.entity.SwordBonus;
 import warriors.entity.Wall;
-import warriors.observers.MoveObserver;
-import warriors.observers.Observer;
+import warriors.observers.GameSoldierObserver;
 import warriors.rule.WarriorMoveStrategy;
 import warriors.rule.WarriorsOverlapRules;
 
@@ -110,29 +109,27 @@ public class GameLevelOne extends GameLevelDefaultImpl {
 		}
 
 		
-		Observer obs = new MoveObserver(universe);
+		GameSoldierObserver obs = new GameSoldierObserver(universe);
 
 		// Pacman definition and inclusion in the universe
-		GameSoldier player1 = new GameSoldier(canvas, "images/link.gif");
-		player1.attache(obs);
+		GameSoldier player1 = new GameSoldier(canvas, "images/link.gif", obs, 26 * SPRITE_SIZE, 1 * SPRITE_SIZE );
 		GameMovableDriverDefaultImpl driver1 = new GameMovableDriverDefaultImpl();
 		WarriorMoveStrategy keyStr = new WarriorMoveStrategy(KeyEvent.VK_RIGHT, KeyEvent.VK_LEFT, KeyEvent.VK_UP, KeyEvent.VK_DOWN);
 		driver1.setStrategy(keyStr);
 		driver1.setmoveBlockerChecker(moveBlockerChecker);
 		canvas.addKeyListener(keyStr);
+		canvas.addKeyListener(player1);
 		player1.setDriver(driver1);
-		player1.setPosition(new Point(26 * SPRITE_SIZE, 1 * SPRITE_SIZE));
 		universe.addGameEntity(player1);
 
-		GameSoldier player2 = new GameSoldier(canvas, "images/link.gif");
-		player2.attache(obs);
+		GameSoldier player2 = new GameSoldier(canvas, "images/link.gif",obs, 1 * SPRITE_SIZE, 1 * SPRITE_SIZE);
 		GameMovableDriverDefaultImpl driver2 = new GameMovableDriverDefaultImpl();
 		WarriorMoveStrategy keyStrPlayer2 = new WarriorMoveStrategy(KeyEvent.VK_D, KeyEvent.VK_Q, KeyEvent.VK_Z, KeyEvent.VK_S);
 		driver2.setStrategy(keyStrPlayer2);
 		driver2.setmoveBlockerChecker(moveBlockerChecker);
 		canvas.addKeyListener(keyStrPlayer2);
+		canvas.addKeyListener(player2);
 		player2.setDriver(driver2);
-		player2.setPosition(new Point(1 * SPRITE_SIZE, 1 * SPRITE_SIZE));
 		universe.addGameEntity(player2);
 	}
 	public GameLevelOne(Game g) {
