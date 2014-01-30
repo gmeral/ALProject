@@ -64,7 +64,9 @@ public class WarriorsOverlapRules extends OverlapRulesApplierDefaultImpl {
 	
 	public void overlapRule(GameSoldier player,HolyGrailBonus grail) {
 		winner = player;
-		endOfGame.setValue(true); //TODO Ecran de victoire en fonction du player
+		player.setSpriteWeapon("win");
+		universe.removeGameEntity(grail);
+		endOfGame.setValue(true);
 	}
 	
 	public void overlapRule(GameSoldier player,GameSoldier player2) {

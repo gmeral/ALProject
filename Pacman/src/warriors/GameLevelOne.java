@@ -111,8 +111,8 @@ public class GameLevelOne extends GameLevelDefaultImpl {
 		
 		GameSoldierObserver obs = new GameSoldierObserver(universe);
 
-		// Pacman definition and inclusion in the universe
-		GameSoldier player1 = new GameSoldier(canvas, "images/link.gif", obs, 26 * SPRITE_SIZE, 1 * SPRITE_SIZE );
+		
+		GameSoldier player1 = new GameSoldier(canvas, "images/link.gif", obs, 26 * SPRITE_SIZE, 1 * SPRITE_SIZE, KeyEvent.VK_NUMPAD0  );
 		GameMovableDriverDefaultImpl driver1 = new GameMovableDriverDefaultImpl();
 		WarriorMoveStrategy keyStr = new WarriorMoveStrategy(KeyEvent.VK_RIGHT, KeyEvent.VK_LEFT, KeyEvent.VK_UP, KeyEvent.VK_DOWN);
 		driver1.setStrategy(keyStr);
@@ -122,7 +122,7 @@ public class GameLevelOne extends GameLevelDefaultImpl {
 		player1.setDriver(driver1);
 		universe.addGameEntity(player1);
 
-		GameSoldier player2 = new GameSoldier(canvas, "images/link.gif",obs, 1 * SPRITE_SIZE, 1 * SPRITE_SIZE);
+		GameSoldier player2 = new GameSoldier(canvas, "images/link2.gif",obs, 1 * SPRITE_SIZE, 1 * SPRITE_SIZE, KeyEvent.VK_SPACE);
 		GameMovableDriverDefaultImpl driver2 = new GameMovableDriverDefaultImpl();
 		WarriorMoveStrategy keyStrPlayer2 = new WarriorMoveStrategy(KeyEvent.VK_D, KeyEvent.VK_Q, KeyEvent.VK_Z, KeyEvent.VK_S);
 		driver2.setStrategy(keyStrPlayer2);
@@ -136,5 +136,11 @@ public class GameLevelOne extends GameLevelDefaultImpl {
 		super(g);
 		canvas = g.getCanvas();
 	}
-
+	
+	
+	public void end() {
+		universe.allOneStepMoves();
+		gameBoard.paint();
+		super.end();
+	}
 }
