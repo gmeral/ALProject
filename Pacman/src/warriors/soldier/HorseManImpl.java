@@ -4,8 +4,8 @@ package warriors.soldier;
  
 public class HorseManImpl extends AbstractSoldier {
 
-	public static final int INITIAL_HORSEMAN_HP = 100;
-	public static final int INITIAL_HORSEMAN_STRENGTH = 20;
+	public static final int INITIAL_HORSEMAN_HP = 4;
+	public static final int INITIAL_HORSEMAN_STRENGTH = 0;
 
 	
 	public HorseManImpl (){

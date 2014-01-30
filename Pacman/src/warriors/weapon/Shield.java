@@ -6,7 +6,7 @@ import warriors.visitor.WarriorsVisitor;
 public class Shield extends AbstractWeapon {
 
 	public static final int ShieldStrengthBonus = 0;
-	public static final int ShieldDamageReduction  = 10;
+	public static final int ShieldDamageReduction  = 1;
 	
 	
 	public Shield(){

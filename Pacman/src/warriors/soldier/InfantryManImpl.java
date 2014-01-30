@@ -3,8 +3,8 @@ package warriors.soldier;
 
 public class InfantryManImpl extends AbstractSoldier{
 
-	public static final int INITIAL_INFANTRYMAN_HP = 100;
-	public static final int INITIAL_INFANTRYMAN_STRENGTH = 10;
+	public static final int INITIAL_INFANTRYMAN_HP = 3;
+	public static final int INITIAL_INFANTRYMAN_STRENGTH = 0;
 	
 	
 	public InfantryManImpl(){

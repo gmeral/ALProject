@@ -51,9 +51,11 @@ public class WarriorsOverlapRules extends OverlapRulesApplierDefaultImpl {
 	
 	public void overlapRule(GameSoldier player,ShieldBonus bonus){
 		if(bonus.applyBonus(player)) {
+			player.setSpriteWeapon("shield+");
 			universe.removeGameEntity(bonus);
 		}
 	}
+	
 	public void overlapRule(GameSoldier player,SwordBonus bonus){
 		if(bonus.applyBonus(player)) {
 			universe.removeGameEntity(bonus);

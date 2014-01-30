@@ -5,7 +5,7 @@ import warriors.visitor.WarriorsVisitor;
 
 public class LaserSword extends AbstractWeapon {
 
-	public static final int LaserSwordStrengthBonus = 10;
+	public static final int LaserSwordStrengthBonus = 2;
 	public static final int LaserSwordDamageReduction  = 0;
 	
 	

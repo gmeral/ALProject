@@ -113,7 +113,7 @@ public class GameLevelOne extends GameLevelDefaultImpl {
 		Observer obs = new MoveObserver(universe);
 
 		// Pacman definition and inclusion in the universe
-		GameSoldier player1 = new GameSoldier(canvas, true);
+		GameSoldier player1 = new GameSoldier(canvas, "images/link.gif");
 		player1.attache(obs);
 		GameMovableDriverDefaultImpl driver1 = new GameMovableDriverDefaultImpl();
 		WarriorMoveStrategy keyStr = new WarriorMoveStrategy(KeyEvent.VK_RIGHT, KeyEvent.VK_LEFT, KeyEvent.VK_UP, KeyEvent.VK_DOWN);
@@ -124,7 +124,7 @@ public class GameLevelOne extends GameLevelDefaultImpl {
 		player1.setPosition(new Point(26 * SPRITE_SIZE, 1 * SPRITE_SIZE));
 		universe.addGameEntity(player1);
 
-		GameSoldier player2 = new GameSoldier(canvas, false);
+		GameSoldier player2 = new GameSoldier(canvas, "images/link.gif");
 		player2.attache(obs);
 		GameMovableDriverDefaultImpl driver2 = new GameMovableDriverDefaultImpl();
 		WarriorMoveStrategy keyStrPlayer2 = new WarriorMoveStrategy(KeyEvent.VK_D, KeyEvent.VK_Q, KeyEvent.VK_Z, KeyEvent.VK_S);
