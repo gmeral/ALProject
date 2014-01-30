@@ -132,6 +132,9 @@ public class GameSoldier extends GameMovable implements GameEntity, Drawable, Ov
 
 	@Override
 	public void draw(Graphics g) {
+		if (isInvincible()) {
+			invincibleTimer--;
+		}
 		String prefix = "";
 		String suffix = "";
 		if(!spriteState.equals("win")){
@@ -163,9 +166,6 @@ public class GameSoldier extends GameMovable implements GameEntity, Drawable, Ov
 		spriteManager.setType(prefix+spriteState+suffix);
 		spriteManager.draw(g, getPosition());
 		soldier.notifyMove(this);
-		if (isInvincible()) {
-			invincibleTimer--;
-		}
 	}
 
 	@Override

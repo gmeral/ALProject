@@ -9,7 +9,7 @@ abstract class AbstractSoldier implements Soldier {
 	private int sightRange;
 	private String name;
 	static protected int peonID = 0;
-	public static final int INITIAL_SIGHTRANGE = 3;
+	public static final int INITIAL_SIGHTRANGE = 10;
 	
 	protected AbstractSoldier(int str, int hp) {
 		strength = str;

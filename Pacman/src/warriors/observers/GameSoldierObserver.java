@@ -6,6 +6,7 @@ import gameframework.game.GameUniverse;
 import java.awt.Point;
 import java.awt.geom.Point2D;
 import java.util.Iterator;
+import java.util.List;
 
 import warriors.GameLevelOne;
 import warriors.army.Unit;
@@ -18,11 +19,16 @@ public class GameSoldierObserver implements Observer{
 
 	public static final int SpriteSize = 16;
 	private GameUniverse universe;
-
+	List<GameEntity> targets;
 	public GameSoldierObserver(GameUniverse univ){
 		universe = univ;
 	}
 
+
+	public void setTargets(List<GameEntity> list){
+		targets = list;
+	}
+	
 	@Override
 	public void strikeDone(Unit u, int dmg) {
 		if(u instanceof GameSoldier)
@@ -40,9 +46,7 @@ public class GameSoldierObserver implements Observer{
 		Point hitPlace = new Point();
 		hitPlace.setLocation(soldier.getPosition().getX() + soldier.getSpeedVector().getDirection().getX()*SpriteSize,
 				soldier.getPosition().getY() + soldier.getSpeedVector().getDirection().getY()*SpriteSize);
-		Iterator<GameEntity> entity = universe.gameEntities();
-		while(entity.hasNext()){
-			GameEntity current = entity.next();
+		for(GameEntity current : targets){
 			if (current instanceof GameSoldier && ((GameSoldier) current).getPosition().equals(hitPlace)){
 				((GameSoldier) current).parry(dmg);
 			}		

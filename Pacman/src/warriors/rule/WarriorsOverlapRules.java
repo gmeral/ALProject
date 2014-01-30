@@ -59,7 +59,7 @@ public class WarriorsOverlapRules extends OverlapRulesApplierDefaultImpl {
 	
 	public void overlapRule(GameSoldier player,Ghost ghost){
 		player.parry(ghost.getDamages());
-		player.setInvincible(25);
+		player.setInvincible(5);
 	}
 	
 	public void overlapRule(GameSoldier player,SwordBonus bonus){
