@@ -1,16 +1,18 @@
 package warriors;
 
-import gameframework.game.GameDefaultImpl;
 import gameframework.game.GameLevel;
 
 import java.util.ArrayList;
 
+import warriors.customframework.WarriorsGameImpl;
+
 public class Main {
 	public static void main(String[] args) {
-		GameDefaultImpl g = new GameDefaultImpl();
+		WarriorsGameImpl g = new WarriorsGameImpl(); //redefine game size
 		ArrayList<GameLevel> levels = new ArrayList<GameLevel>();
 
-		levels.add(new GameLevelOne(g)); // only one level is available at this time
+		levels.add(new GameLevelTwo(g));
+		levels.add(new GameLevelOne(g));
 		
 		g.setLevels(levels);
 		g.start();

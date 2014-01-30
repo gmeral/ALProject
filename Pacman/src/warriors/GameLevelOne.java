@@ -15,6 +15,7 @@ import gameframework.game.OverlapProcessorDefaultImpl;
 import java.awt.Canvas;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
+import java.util.Date;
 
 import warriors.entity.Floor;
 import warriors.entity.GameSoldier;
@@ -28,7 +29,9 @@ import warriors.rule.WarriorsOverlapRules;
 
 public class GameLevelOne extends GameLevelDefaultImpl {
 	Canvas canvas;
-
+	private static final int MINIMUM_DELAY_BETWEEN_GAME_CYCLES = 40;
+	boolean stopGameLoop;
+	
 	// 0 : Pacgums; 1 : Walls; 2 : SuperPacgums; 3 : Doors; 4 : Jail; 5 : empty
 	// Note: teleportation points are not indicated since they are defined by
 	// directed pairs of positions.
@@ -47,7 +50,7 @@ public class GameLevelOne extends GameLevelDefaultImpl {
 		{ 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1 },
 		{ 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 3, 3, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1 },
 		{ 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1 },
-		{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 4, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+		{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 4, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 		{ 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1 },
 		{ 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1 },
 		{ 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1 },
@@ -137,10 +140,32 @@ public class GameLevelOne extends GameLevelDefaultImpl {
 		canvas = g.getCanvas();
 	}
 	
+	@Override
+	public void run() {
+		stopGameLoop = false;
+		// main game loop :
+		long start;
+		while (!stopGameLoop && !this.isInterrupted()) {
+			start = new Date().getTime();
+			gameBoard.paint();
+			universe.allOneStepMoves();
+			universe.processAllOverlaps();
+			try {
+				long sleepTime = MINIMUM_DELAY_BETWEEN_GAME_CYCLES
+						- (new Date().getTime() - start);
+				if (sleepTime > 0) {
+					Thread.sleep(sleepTime);
+				}
+			} catch (Exception e) {
+			}
+		}
+	}
 	
+	@Override
 	public void end() {
 		universe.allOneStepMoves();
 		gameBoard.paint();
+		stopGameLoop = true;
 		super.end();
 	}
 }

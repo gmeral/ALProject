@@ -12,6 +12,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Arrays;
 
 import warriors.army.Unit;
 import warriors.customframework.WarriorsSpriteManagerImpl;
@@ -28,7 +29,7 @@ public class GameSoldier extends GameMovable implements GameEntity, Drawable, Ov
 	private SoldierProxy soldier;
 	public static final int RENDERING_SIZE = 16;
 	public static final int SPRITE_SIZE = 16;
-	public static final int[] SPRITE_ROWS ={2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1,1};
+	public static final int[] SPRITE_ROWS ={2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,  2, 2, 2, 2, 2, 2, 2, 2,2};
 	protected final SpriteManager spriteManager;
 	protected boolean movable = true;
 	private String spriteState = "";

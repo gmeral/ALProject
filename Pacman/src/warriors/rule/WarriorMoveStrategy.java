@@ -10,7 +10,7 @@ import java.awt.event.KeyEvent;
 
 public class WarriorMoveStrategy extends KeyAdapter implements MoveStrategy {
 	protected SpeedVector speedVector = new SpeedVectorDefaultImpl(new Point(0,1),0);
-	private static final int DEFAULT_SPEED = 16;
+	private static final int DEFAULT_SPEED = 8;
 	private final int  right, left,up, down;
 
 
