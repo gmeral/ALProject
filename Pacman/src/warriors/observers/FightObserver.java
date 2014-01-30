@@ -7,6 +7,8 @@ public class FightObserver implements Observer {
 
 	private StringBuffer fightLog = new StringBuffer();
 	
+	public FightObserver(){}
+	
 	@Override
 	public void strikeDone(Unit u, int dmg) {		
 		fightLog.append(u.getName() + " a donné un coup de force " + dmg + "\n");

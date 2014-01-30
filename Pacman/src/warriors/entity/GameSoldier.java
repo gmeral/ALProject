@@ -15,6 +15,7 @@ import java.awt.event.KeyListener;
 
 import warriors.army.Unit;
 import warriors.customframework.WarriorsSpriteManagerImpl;
+import warriors.observers.GameSoldierObserver;
 import warriors.observers.Observer;
 import warriors.proxy.InfantryMan;
 import warriors.proxy.SoldierProxy;
@@ -27,22 +28,32 @@ public class GameSoldier extends GameMovable implements GameEntity, Drawable, Ov
 	private SoldierProxy soldier;
 	public static final int RENDERING_SIZE = 16;
 	public static final int SPRITE_SIZE = 16;
-	public static final int[] SPRITE_ROWS ={2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1};
+	public static final int[] SPRITE_ROWS ={2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1};
 	protected final SpriteManager spriteManager;
 	protected boolean movable = true;
-	private String spriteWeapon = "";
+	private String spriteState = "";
+	private boolean hurt = false;
 	private int strikeKey = KeyEvent.VK_M;
+	Point initPosition;
+	GameSoldierObserver obs;
 
 
-	public GameSoldier(Canvas defaultCanvas, String spritePath) {
-			spriteManager = new WarriorsSpriteManagerImpl(spritePath,  //TODO Sprite joueur 2
-					defaultCanvas, RENDERING_SIZE, SPRITE_SIZE, SPRITE_ROWS, getBoundingBox());
+	public GameSoldier(Canvas defaultCanvas, String spritePath, GameSoldierObserver observer, int x, int y) {
+		spriteManager = new WarriorsSpriteManagerImpl(spritePath,  //TODO Sprite joueur 2
+				defaultCanvas, RENDERING_SIZE, SPRITE_SIZE, SPRITE_ROWS, getBoundingBox());
 		spriteManager.setTypes("down", "right", "up", "left",
-							   "shield+down", "shield+right", "shield+up", "shield+left",
-							   "hit+down", "hit+right", "hit+up", "hit+left",
-							   "static+down", "static+right", "static+up", "static+left",
-							   "shield+static+down", "shield+static+right", "shield+static+up", "shield+static+left");
+				"shield+down", "shield+right", "shield+up", "shield+left",
+				"hit+down", "hit+right", "hit+up", "hit+left",
+				"hurt+down", "hurt+right", "hurt+up", "hurt+left",
+				"hurt+shield+down", "hurt+shield+right", "hurt+shield+up", "hurt+shield+left",
+				"hurt+hit+down", "hurt+hit+right", "hurt+hit+up", "hurt+hit+left",
+				"static+down", "static+right", "static+up", "static+left",
+				"shield+static+down", "shield+static+right", "shield+static+up", "shield+static+left");
 		soldier = new InfantryMan();
+		soldier.attache(observer);
+		initPosition = new Point(x,y);
+		setPosition(initPosition);
+		obs = observer;
 	}
 
 	@Override
@@ -55,13 +66,27 @@ public class GameSoldier extends GameMovable implements GameEntity, Drawable, Ov
 	}
 
 	@Override
-	public int parry(int damages) throws DeadSoldierException {
-		return soldier.parry(damages);
+	public int parry(int damages){
+		hurt = true;
+		int dmg = 0;
+		try {
+			dmg = soldier.parry(damages);
+		} catch (DeadSoldierException e) {
+			soldier = new InfantryMan();
+			soldier.attache(obs);
+			spriteState = "";
+			setPosition(initPosition);
+			return dmg;
+		}
+		return dmg;
 	}
 
 	@Override
 	public int strike() {
-		return soldier.strike(); //TODO gestion des sprites de strike.
+		int strength = soldier.strike();
+		if (strength > 0)
+			soldier.notifyStrike(this, strength);
+		return strength; //TODO gestion des sprites de strike.
 	}
 
 	@Override
@@ -99,9 +124,14 @@ public class GameSoldier extends GameMovable implements GameEntity, Drawable, Ov
 		Point tmp = getSpeedVector().getDirection();
 		int speed = getSpeedVector().getSpeed();
 		movable = true;
+		String prefix = "";
 		String suffix = "";
-		if (speed == 0 && !spriteWeapon.contentEquals("hit+")); {
+		if (speed == 0 && !spriteState.equals("hit+") && !hurt) {
 			suffix += "static+";
+		}
+		if(hurt){
+			prefix += "hurt+";
+			hurt = false;
 		}
 		if (tmp.getX() == 1) {
 			suffix += "right";
@@ -116,7 +146,7 @@ public class GameSoldier extends GameMovable implements GameEntity, Drawable, Ov
 			spriteManager.reset();
 			movable = false;
 		}
-		spriteManager.setType(spriteWeapon+suffix);
+		spriteManager.setType(prefix+spriteState+suffix);
 		spriteManager.draw(g, getPosition());
 		soldier.notifyMove(this);
 	}
@@ -131,9 +161,9 @@ public class GameSoldier extends GameMovable implements GameEntity, Drawable, Ov
 	public int getSightRange() {
 		return soldier.getSightRange();
 	}
-	
+
 	public void setSpriteWeapon(String spriteWeapon) {
-		this.spriteWeapon = spriteWeapon;
+		this.spriteState = spriteWeapon;
 	}
 
 	@Override
@@ -141,22 +171,24 @@ public class GameSoldier extends GameMovable implements GameEntity, Drawable, Ov
 
 	}
 
+	String currentWeapon;	
 	@Override
 	public void keyPressed(KeyEvent e) {
-		String currentWeapon = spriteWeapon;
+		currentWeapon = spriteState;
 		int keycode = e.getKeyCode();
 		if (keycode == strikeKey){
 			if (strike() >0){
-				spriteWeapon = "hit+";
+				spriteState = "hit+";
 			}
 		}
-//		spriteWeapon = currentWeapon;
+
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
+		int keycode = e.getKeyCode();
+		if (keycode == strikeKey){
+			spriteState = currentWeapon;
+		}
 	}
-	
 }

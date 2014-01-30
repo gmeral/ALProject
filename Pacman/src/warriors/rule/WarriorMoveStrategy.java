@@ -27,6 +27,7 @@ public class WarriorMoveStrategy extends KeyAdapter implements MoveStrategy {
 
 	@Override
 	public void keyPressed(KeyEvent event) {
+
 		int keycode = event.getKeyCode();
 		if (keycode == right) {
 			speedVector.setDirection(new Point(1, 0));
