@@ -73,20 +73,23 @@ public class GameSoldier extends GameMovable implements GameEntity, Drawable, Ov
 
 	@Override
 	public int parry(int damages){
-		hurt = true;
-		int dmg = 0;
-		try {
-			dmg = soldier.parry(damages);
-		} catch (DeadSoldierException e) {
-			soldier = new InfantryMan();
-			soldier.attache(obs);
-			spriteState = "";
-			setPosition(initPosition);
+		if(!isInvincible()){
+			hurt = true;
+			int dmg = 0;
+			try {
+				dmg = soldier.parry(damages);
+			} catch (DeadSoldierException e) {
+				soldier = new InfantryMan();
+				soldier.attache(obs);
+				spriteState = "";
+				setPosition(initPosition);
+				return dmg;
+			} catch (BrokenItemException e) {
+				soldier.notifyBrokenShield(this);
+			}
 			return dmg;
-		} catch (BrokenItemException e) {
-			soldier.notifyBrokenShield(this);
 		}
-		return dmg;
+		return 0;
 	}
 
 	@Override
@@ -210,10 +213,10 @@ public class GameSoldier extends GameMovable implements GameEntity, Drawable, Ov
 	public boolean isInvincible() {
 		return invincibleTimer > 0;
 	}
-	
+
 	public void setInvincible(int timer) {
 		maxInvincibleTimer = invincibleTimer = timer;
 	}
-	
+
 
 }
