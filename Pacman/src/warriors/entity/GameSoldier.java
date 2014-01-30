@@ -29,7 +29,7 @@ public class GameSoldier extends GameMovable implements GameEntity, Drawable, Ov
 	private SoldierProxy soldier;
 	public static final int RENDERING_SIZE = 16;
 	public static final int SPRITE_SIZE = 16;
-	public static final int[] SPRITE_ROWS ={2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,  2, 2, 2, 2, 2, 2, 2, 2,2};
+	public static final int[] SPRITE_ROWS ={4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,  4, 4, 4, 4, 4, 4, 4, 4,4};
 	protected final SpriteManager spriteManager;
 	protected int invincibleTimer = 0;
 	protected int maxInvincibleTimer = 0;
@@ -42,7 +42,7 @@ public class GameSoldier extends GameMovable implements GameEntity, Drawable, Ov
 
 
 	public GameSoldier(Canvas defaultCanvas, String spritePath, GameSoldierObserver observer, int x, int y, int strikeKey) {
-		spriteManager = new WarriorsSpriteManagerImpl(spritePath,  //TODO Sprite joueur 2
+		spriteManager = new WarriorsSpriteManagerImpl(spritePath,
 				defaultCanvas, RENDERING_SIZE, SPRITE_SIZE, SPRITE_ROWS, getBoundingBox());
 		spriteManager.setTypes("down", "right", "up", "left",
 				"shield+down", "shield+right", "shield+up", "shield+left",

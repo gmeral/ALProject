@@ -2,7 +2,7 @@
 
 package warriors;
 
-import gameframework.base.MoveStrategyRandom;
+
 import gameframework.game.CanvasDefaultImpl;
 import gameframework.game.Game;
 import gameframework.game.GameLevelDefaultImpl;
@@ -21,9 +21,10 @@ import java.awt.event.KeyEvent;
 import java.util.Date;
 
 import pacman.rule.GhostMovableDriver;
-import warriors.entity.Ghost;
+import warriors.customframework.MoveStrategyRandom;
 import warriors.entity.Floor;
 import warriors.entity.GameSoldier;
+import warriors.entity.Ghost;
 import warriors.entity.HolyGrailBonus;
 import warriors.entity.ShieldBonus;
 import warriors.entity.SwordBonus;

@@ -26,24 +26,13 @@ public class Ghost extends GameMovable implements Drawable, GameEntity, Overlapp
 	protected DrawableImage hidden = null;
 
 	public Ghost(Canvas defaultCanvas,int x, int y) {
-		spriteManager = new SpriteManagerDefaultImpl("images/ghost.gif",
-				defaultCanvas, RENDERING_SIZE, 6);
+		spriteManager = new SpriteManagerDefaultImpl("images/wizzrobe.gif",
+				defaultCanvas, RENDERING_SIZE, 8);
 		spriteManager.setTypes(
-				//
 				"left",
-				"right",
 				"up",
-				"down",//
-				"beginAfraid-left",
-				"beginAfraid-right",
-				"beginAfraid-up",
-				"beginAfraid-down", //
-				"endAfraid-left", "endAfraid-right",
-				"endAfraid-up",
-				"endAfraid-down", //
-				"inactive-left", "inactive-right", "inactive-up",
-				"inactive-down", //
-				"unused");
+				"right",
+				"down");
 		hidden = new DrawableImage("images/black.gif", defaultCanvas);
 		setPosition(new Point(x, y));
 	}
@@ -69,15 +58,6 @@ public class Ghost extends GameMovable implements Drawable, GameEntity, Overlapp
 			String spriteType = "";
 			Point tmp = getSpeedVector().getDirection();
 			movable = true;
-
-			if (!isActive()) {
-				spriteType = "inactive-";
-			} else if (afraidTimer > maxAfraidTimer / 2) {
-				spriteType = "beginAfraid-";
-			} else if (isAfraid()) {
-				spriteType = "endAfraid-";
-			}
-
 			if (tmp.getX() == -1) {
 				spriteType += "left";
 			} else if (tmp.getY() == 1) {

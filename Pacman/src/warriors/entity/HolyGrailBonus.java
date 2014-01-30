@@ -14,7 +14,7 @@ public class HolyGrailBonus extends AbstractBonus {
 	
 	public HolyGrailBonus(Canvas canvas, int x, int y) {
 		super(canvas, x, y, new DrawableImage("images/triforce.gif", canvas));
-		spriteManager = new SpriteManagerDefaultImpl("images/triforce.gif", canvas, RENDERING_SIZE, 2);
+		spriteManager = new SpriteManagerDefaultImpl("images/triforce.gif", canvas, RENDERING_SIZE, 4);
 		spriteManager.setTypes("unique");
 		spriteManager.setType("unique");
 	}
