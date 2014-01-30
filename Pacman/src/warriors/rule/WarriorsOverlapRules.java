@@ -11,6 +11,7 @@ import java.util.Vector;
 import warriors.entity.AbstractBonus;
 import warriors.entity.Floor;
 import warriors.entity.GameSoldier;
+import warriors.entity.Ghost;
 import warriors.entity.HolyGrailBonus;
 import warriors.entity.ShieldBonus;
 import warriors.entity.SwordBonus;
@@ -51,9 +52,14 @@ public class WarriorsOverlapRules extends OverlapRulesApplierDefaultImpl {
 	
 	public void overlapRule(GameSoldier player,ShieldBonus bonus){
 		if(bonus.applyBonus(player)) {
-			player.setSpriteWeapon("shield+");
+			player.setSpriteState("shield+");
 			universe.removeGameEntity(bonus);
 		}
+	}
+	
+	public void overlapRule(GameSoldier player,Ghost ghost){
+		player.parry(ghost.getDamages());
+		player.setInvincible(25);
 	}
 	
 	public void overlapRule(GameSoldier player,SwordBonus bonus){
@@ -64,7 +70,7 @@ public class WarriorsOverlapRules extends OverlapRulesApplierDefaultImpl {
 	
 	public void overlapRule(GameSoldier player,HolyGrailBonus grail) {
 		winner = player;
-		player.setSpriteWeapon("win");
+		player.setSpriteState("win");
 		universe.removeGameEntity(grail);
 		endOfGame.setValue(true);
 	}

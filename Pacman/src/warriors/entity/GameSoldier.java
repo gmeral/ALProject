@@ -12,7 +12,6 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.Arrays;
 
 import warriors.army.Unit;
 import warriors.customframework.WarriorsSpriteManagerImpl;
@@ -22,6 +21,7 @@ import warriors.proxy.InfantryMan;
 import warriors.proxy.SoldierProxy;
 import warriors.soldier.DeadSoldierException;
 import warriors.visitor.WarriorsVisitor;
+import warriors.weapon.BrokenItemException;
 import warriors.weapon.TooManyItemsException;
 import warriors.weapon.Weapon;
 
@@ -31,6 +31,8 @@ public class GameSoldier extends GameMovable implements GameEntity, Drawable, Ov
 	public static final int SPRITE_SIZE = 16;
 	public static final int[] SPRITE_ROWS ={2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,  2, 2, 2, 2, 2, 2, 2, 2,2};
 	protected final SpriteManager spriteManager;
+	protected int invincibleTimer = 0;
+	protected int maxInvincibleTimer = 0;
 	protected boolean movable = true;
 	private String spriteState = "";
 	private boolean hurt = false;
@@ -81,6 +83,8 @@ public class GameSoldier extends GameMovable implements GameEntity, Drawable, Ov
 			spriteState = "";
 			setPosition(initPosition);
 			return dmg;
+		} catch (BrokenItemException e) {
+			soldier.notifyBrokenShield(this);
 		}
 		return dmg;
 	}
@@ -156,12 +160,16 @@ public class GameSoldier extends GameMovable implements GameEntity, Drawable, Ov
 		spriteManager.setType(prefix+spriteState+suffix);
 		spriteManager.draw(g, getPosition());
 		soldier.notifyMove(this);
+		if (isInvincible()) {
+			invincibleTimer--;
+		}
 	}
 
 	@Override
 	public void oneStepMoveAddedBehavior() {
 		if (movable) 
 			spriteManager.increment();
+
 	}
 
 	@Override
@@ -169,7 +177,7 @@ public class GameSoldier extends GameMovable implements GameEntity, Drawable, Ov
 		return soldier.getSightRange();
 	}
 
-	public void setSpriteWeapon(String spriteWeapon) {
+	public void setSpriteState(String spriteWeapon) {
 		this.spriteState = spriteWeapon;
 	}
 
@@ -198,4 +206,14 @@ public class GameSoldier extends GameMovable implements GameEntity, Drawable, Ov
 			spriteState = currentWeapon;
 		}
 	}
+
+	public boolean isInvincible() {
+		return invincibleTimer > 0;
+	}
+	
+	public void setInvincible(int timer) {
+		maxInvincibleTimer = invincibleTimer = timer;
+	}
+	
+
 }

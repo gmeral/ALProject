@@ -3,12 +3,13 @@ package warriors.army;
 import warriors.observers.Observer;
 import warriors.soldier.DeadSoldierException;
 import warriors.visitor.WarriorsVisitor;
+import warriors.weapon.BrokenItemException;
 import warriors.weapon.TooManyItemsException;
 import warriors.weapon.Weapon;
 
 public interface Unit {
 	//Soldier interface
-	int parry(int damages) throws DeadSoldierException;
+	int parry(int damages) throws DeadSoldierException, BrokenItemException;
 	int strike();
 	int getSightRange();
 	String toString();

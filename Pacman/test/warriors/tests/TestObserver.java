@@ -10,6 +10,7 @@ import warriors.army.Unit;
 import warriors.observers.FightObserver;
 import warriors.proxy.InfantryMan;
 import warriors.soldier.DeadSoldierException;
+import warriors.weapon.BrokenItemException;
 import warriors.weapon.Shield;
 import warriors.weapon.Sword;
 import warriors.weapon.TooManyItemsException;
@@ -59,7 +60,12 @@ public class TestObserver {
 
 		while(true) {
 			try {
-				alpha.parry(jeanlouis.strike()+ 50);
+				try {
+					alpha.parry(jeanlouis.strike()+ 50);
+				} catch (BrokenItemException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			} catch (DeadSoldierException e) {
 				Assert.assertEquals(5, fightObserver);
 				break;

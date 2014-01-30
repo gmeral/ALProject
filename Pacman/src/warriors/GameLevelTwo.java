@@ -1,7 +1,8 @@
 
-		
+
 package warriors;
 
+import gameframework.base.MoveStrategyRandom;
 import gameframework.game.CanvasDefaultImpl;
 import gameframework.game.Game;
 import gameframework.game.GameLevelDefaultImpl;
@@ -19,6 +20,8 @@ import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.util.Date;
 
+import pacman.rule.GhostMovableDriver;
+import warriors.entity.Ghost;
 import warriors.entity.Floor;
 import warriors.entity.GameSoldier;
 import warriors.entity.HolyGrailBonus;
@@ -33,7 +36,7 @@ public class GameLevelTwo extends GameLevelDefaultImpl {
 	Canvas canvas;
 	private static final int MINIMUM_DELAY_BETWEEN_GAME_CYCLES = 40;
 	boolean stopGameLoop;
-	
+
 	// 0 : Pacgums; 1 : Walls; 2 : SuperPacgums; 3 : Doors; 4 : Jail; 5 : empty
 	// Note: teleportation points are not indicated since they are defined by
 	// directed pairs of positions.
@@ -45,17 +48,17 @@ public class GameLevelTwo extends GameLevelDefaultImpl {
 		{ 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1 },
 		{ 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1 },
 		{ 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1 },
-		{ 1, 0, 1, 3, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 3, 1, 0, 1 },
+		{ 1, 0, 1, 3, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 5, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 3, 1, 0, 1 },
 		{ 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1 },
 		{ 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1 },
 		{ 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1 },
 		{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-		{ 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1 },
-		{ 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1 },
+		{ 1, 0, 0, 0, 0, 0, 5, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 5, 0, 0, 0, 0, 0, 1 },
+		{ 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1 },
 		{ 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1 },
 		{ 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 4, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1 },
 		{ 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1 },
-		{ 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1 },
+		{ 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 5, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1 },
 		{ 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1 },
 		{ 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1 },
 		{ 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1 },
@@ -64,7 +67,7 @@ public class GameLevelTwo extends GameLevelDefaultImpl {
 		{ 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1 },
 		{ 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1 },
 		{ 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1 },
-		{ 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 },
+		{ 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 2, 5, 2, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 },
 		{ 1, 0, 2, 3, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 3, 2, 0, 1 },
 		{ 1, 0, 3, 2, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 2, 3, 0, 1 },
 		{ 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 2, 1, 2, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 },
@@ -109,13 +112,24 @@ public class GameLevelTwo extends GameLevelDefaultImpl {
 					universe.addGameEntity(new Floor(canvas, j * SPRITE_SIZE, i * SPRITE_SIZE));
 					universe.addGameEntity(new HolyGrailBonus(canvas,j * SPRITE_SIZE, i * SPRITE_SIZE));
 				}
+				if (tab[i][j] == 5) {
+					universe.addGameEntity(new Floor(canvas, j * SPRITE_SIZE, i * SPRITE_SIZE));
+					Ghost myGhost;
+					GameMovableDriverDefaultImpl ghostDriv = new GhostMovableDriver();
+					MoveStrategyRandom ranStr = new MoveStrategyRandom();
+					ghostDriv.setStrategy(ranStr);
+					ghostDriv.setmoveBlockerChecker(moveBlockerChecker);
+					myGhost = new Ghost(canvas,j * SPRITE_SIZE, i * SPRITE_SIZE);
+					myGhost.setDriver(ghostDriv);
+					universe.addGameEntity(myGhost);
+				}
 			}
 		}
 
-		
+
 		GameSoldierObserver obs = new GameSoldierObserver(universe);
 
-		
+
 		GameSoldier player1 = new GameSoldier(canvas, "images/link.gif", obs, 27 * SPRITE_SIZE, 1 * SPRITE_SIZE, KeyEvent.VK_NUMPAD0  );
 		GameMovableDriverDefaultImpl driver1 = new GameMovableDriverDefaultImpl();
 		WarriorMoveStrategy keyStr = new WarriorMoveStrategy(KeyEvent.VK_RIGHT, KeyEvent.VK_LEFT, KeyEvent.VK_UP, KeyEvent.VK_DOWN);
@@ -140,7 +154,7 @@ public class GameLevelTwo extends GameLevelDefaultImpl {
 		super(g);
 		canvas = g.getCanvas();
 	}
-	
+
 	@Override
 	public void run() {
 		stopGameLoop = false;
@@ -161,7 +175,7 @@ public class GameLevelTwo extends GameLevelDefaultImpl {
 			}
 		}
 	}
-	
+
 	@Override
 	public void end() {
 		universe.allOneStepMoves();

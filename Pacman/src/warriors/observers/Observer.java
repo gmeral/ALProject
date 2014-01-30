@@ -8,4 +8,5 @@ public interface Observer {
 	void parryDone(Unit u, int dmg);
 	void deadUnit(Unit u);
 	void moved(GameSoldier soldier);
+	void brokenShield(Unit u);
 }

@@ -6,6 +6,7 @@ import java.util.List;
 
 import warriors.soldier.DeadSoldierException;
 import warriors.visitor.WarriorsVisitor;
+import warriors.weapon.BrokenItemException;
 import warriors.weapon.TooManyItemsException;
 import warriors.weapon.Weapon;
 
@@ -25,7 +26,7 @@ public class Squad extends AbstractObservableUnit {
 	}
 	
 	
-	public int parry(int damages) throws DeadSoldierException {
+	public int parry(int damages) throws DeadSoldierException, BrokenItemException {
 		int damageReduced =0;
 		if (Units.size() == 0){
 			notifyParry(damageReduced);

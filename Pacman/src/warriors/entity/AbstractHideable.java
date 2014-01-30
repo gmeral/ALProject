@@ -1,15 +1,13 @@
 package warriors.entity;
 
-import gameframework.base.Drawable;
 import gameframework.base.DrawableImage;
-import gameframework.game.GameEntity;
 
 import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-public abstract class AbstractHideable implements Drawable, GameEntity{
+public abstract class AbstractHideable implements Hideable{
 	
 	boolean visible=false;
 	private DrawableImage image = null;

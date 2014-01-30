@@ -11,6 +11,7 @@ import warriors.proxy.SoldierProxy;
 import warriors.soldier.DeadSoldierException;
 import warriors.soldier.HorseManImpl;
 import warriors.soldier.InfantryManImpl;
+import warriors.weapon.BrokenItemException;
 import warriors.weapon.Shield;
 import warriors.weapon.Sword;
 import warriors.weapon.TooManyItemsException;
@@ -43,20 +44,36 @@ public class TestComposit {
 	@Test
 	public void testB_DeadSoldierException() {
 		Squad army = new Squad();
-		for(int i=0 ; i<5 ; i++) {
+		for(int i=0 ; i<4 ; i++) {
 			army.addUnit(new SoldierProxy(new HorseManImpl()));
 		}	
-
-		//a horseman can handle 6 of his own strikes, so does an horseman army
-		for(int i=0 ; i<6 ; i++) {
+		try {
+			army.addWeapon(new Sword());
+			army.addWeapon(new Sword());
+		} catch (TooManyItemsException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		//a horseman can handle 3 of his own strikes, so does an horseman army
+		for(int i=0 ; i<3 ; i++) {
 			try {
-				army.parry(army.strike());
+				try {
+					army.parry(army.strike());
+				} catch (BrokenItemException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			} catch (DeadSoldierException e) {
 				Assert.fail("too early");
 			}
 		}
 		try {
-			army.parry(army.strike());
+			try {
+				army.parry(army.strike());
+			} catch (BrokenItemException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
 			Assert.fail("had to die");
 		} catch (DeadSoldierException e) {
 

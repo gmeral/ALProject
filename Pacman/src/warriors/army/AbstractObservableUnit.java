@@ -16,11 +16,17 @@ public abstract class AbstractObservableUnit implements Unit {
 	}
 
 
-	
 	protected void notifyStrike(int strength) {
 		List <Observer> copy = new ArrayList<Observer>(observers);
 		for (Observer o : copy){
 			o.strikeDone(this,strength);
+		}
+	}
+	
+	public void notifyBrokenShield(GameSoldier soldier) {
+		List <Observer> copy = new ArrayList<Observer>(observers);
+		for (Observer o : copy){
+			o.brokenShield(soldier);
 		}
 	}
 	

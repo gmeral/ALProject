@@ -30,5 +30,11 @@ public class FightObserver implements Observer {
 
 	@Override
 	public void moved(GameSoldier soldier) {}
+
+	@Override
+	public void brokenShield(Unit u) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

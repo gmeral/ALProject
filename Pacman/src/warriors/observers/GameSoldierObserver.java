@@ -1,7 +1,6 @@
 package warriors.observers;
 
 import gameframework.game.GameEntity;
-import gameframework.game.GameMovable;
 import gameframework.game.GameUniverse;
 
 import java.awt.Point;
@@ -10,9 +9,9 @@ import java.util.Iterator;
 
 import warriors.GameLevelOne;
 import warriors.army.Unit;
-import warriors.entity.AbstractHideable;
 import warriors.entity.GameSoldier;
-import warriors.soldier.DeadSoldierException;
+import warriors.entity.Ghost;
+import warriors.entity.Hideable;
 
 
 public class GameSoldierObserver implements Observer{
@@ -46,6 +45,9 @@ public class GameSoldierObserver implements Observer{
 			GameEntity current = entity.next();
 			if (current instanceof GameSoldier && ((GameSoldier) current).getPosition().equals(hitPlace)){
 				((GameSoldier) current).parry(dmg);
+			}		
+			if (current instanceof Ghost && ((Ghost) current).getPosition().equals(hitPlace)){
+				universe.removeGameEntity(current);
 			}
 		}
 	}
@@ -55,8 +57,8 @@ public class GameSoldierObserver implements Observer{
 		Iterator<GameEntity> it = universe.gameEntities();
 		while(it.hasNext()){
 			GameEntity current = it.next();
-			if(current instanceof AbstractHideable){
-				AbstractHideable currentHideable = (AbstractHideable) current;
+			if(current instanceof Hideable){
+				Hideable currentHideable = (Hideable) current;
 				if (this.near(currentHideable, soldier)){
 					currentHideable.show();
 				}
@@ -64,10 +66,19 @@ public class GameSoldierObserver implements Observer{
 		}
 	}
 
-	private boolean near(AbstractHideable current, GameSoldier soldier) {
+	private boolean near(Hideable current, GameSoldier soldier) {
 		Point2D p1 = current.getPosition();
 		Point2D p2 = soldier.getPosition();
 		return p1.distance(p2) <= soldier.getSightRange()*GameLevelOne.SPRITE_SIZE;
 	}
 
+	@Override
+	public void brokenShield(Unit u) {
+		if (u instanceof GameSoldier)
+			brokenShield((GameSoldier)u);
+	}
+	
+	public void brokenShield(GameSoldier soldier) {
+		soldier.setSpriteState("");
+	}
 }
