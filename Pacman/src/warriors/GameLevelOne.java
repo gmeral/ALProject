@@ -3,6 +3,7 @@ package warriors;
 import gameframework.game.CanvasDefaultImpl;
 import gameframework.game.Game;
 import gameframework.game.GameLevelDefaultImpl;
+import gameframework.game.GameMovable;
 import gameframework.game.GameMovableDriverDefaultImpl;
 import gameframework.game.GameUniverseDefaultImpl;
 import gameframework.game.GameUniverseViewPortDefaultImpl;
@@ -15,7 +16,9 @@ import gameframework.game.OverlapProcessorDefaultImpl;
 import java.awt.Canvas;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import warriors.entity.Floor;
 import warriors.entity.GameSoldier;
@@ -31,7 +34,7 @@ public class GameLevelOne extends GameLevelDefaultImpl {
 	Canvas canvas;
 	private static final int MINIMUM_DELAY_BETWEEN_GAME_CYCLES = 40;
 	boolean stopGameLoop;
-	
+	List<GameMovable> targets = new ArrayList();
 	// 0 : Pacgums; 1 : Walls; 2 : SuperPacgums; 3 : Doors; 4 : Jail; 5 : empty
 	// Note: teleportation points are not indicated since they are defined by
 	// directed pairs of positions.
@@ -124,7 +127,8 @@ public class GameLevelOne extends GameLevelDefaultImpl {
 		canvas.addKeyListener(player1);
 		player1.setDriver(driver1);
 		universe.addGameEntity(player1);
-
+		targets.add(player1);
+		
 		GameSoldier player2 = new GameSoldier(canvas, "images/link2.gif",obs, 1 * SPRITE_SIZE, 1 * SPRITE_SIZE, KeyEvent.VK_SPACE);
 		GameMovableDriverDefaultImpl driver2 = new GameMovableDriverDefaultImpl();
 		WarriorMoveStrategy keyStrPlayer2 = new WarriorMoveStrategy(KeyEvent.VK_D, KeyEvent.VK_Q, KeyEvent.VK_Z, KeyEvent.VK_S);
@@ -134,6 +138,9 @@ public class GameLevelOne extends GameLevelDefaultImpl {
 		canvas.addKeyListener(player2);
 		player2.setDriver(driver2);
 		universe.addGameEntity(player2);
+		targets.add(player2);
+		
+		obs.setTargets(targets);
 	}
 	public GameLevelOne(Game g) {
 		super(g);

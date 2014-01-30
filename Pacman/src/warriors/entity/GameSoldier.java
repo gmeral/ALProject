@@ -35,7 +35,7 @@ public class GameSoldier extends GameMovable implements GameEntity, Drawable, Ov
 	protected int maxInvincibleTimer = 0;
 	protected boolean movable = true;
 	private String spriteState = "";
-	private boolean hurt = false;
+	private int hurtFrames = 0;
 	private int strikeKey = KeyEvent.VK_M;
 	Point initPosition;
 	GameSoldierObserver obs;
@@ -74,7 +74,7 @@ public class GameSoldier extends GameMovable implements GameEntity, Drawable, Ov
 	@Override
 	public int parry(int damages){
 		if(!isInvincible()){
-			hurt = true;
+			hurtFrames = 4;
 			int dmg = 0;
 			try {
 				dmg = soldier.parry(damages);
@@ -142,12 +142,12 @@ public class GameSoldier extends GameMovable implements GameEntity, Drawable, Ov
 			int speed = getSpeedVector().getSpeed();
 			movable = true;
 
-			if (speed == 0 && !spriteState.equals("hit+") && !hurt) {
+			if (speed == 0 && !spriteState.equals("hit+") && hurtFrames == 0) {
 				suffix += "static+";
 			}
-			if(hurt){
+			if(hurtFrames > 0){
 				prefix += "hurt+";
-				hurt = false;
+				hurtFrames--;
 			}
 			if (tmp.getX() == 1) {
 				suffix += "right";

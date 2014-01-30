@@ -1,9 +1,12 @@
 package warriors.observers;
 
 import gameframework.game.GameEntity;
+import gameframework.game.GameMovable;
 import gameframework.game.GameUniverse;
 
+import java.awt.Dimension;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.geom.Point2D;
 import java.util.Iterator;
 import java.util.List;
@@ -19,16 +22,16 @@ public class GameSoldierObserver implements Observer{
 
 	public static final int SpriteSize = 16;
 	private GameUniverse universe;
-	List<GameEntity> targets;
+	List<GameMovable> targets;
 	public GameSoldierObserver(GameUniverse univ){
 		universe = univ;
 	}
 
 
-	public void setTargets(List<GameEntity> list){
+	public void setTargets(List<GameMovable> list){
 		targets = list;
 	}
-	
+
 	@Override
 	public void strikeDone(Unit u, int dmg) {
 		if(u instanceof GameSoldier)
@@ -42,16 +45,25 @@ public class GameSoldierObserver implements Observer{
 	public void deadUnit(Unit u) {}
 
 
-	public void strikeDone(GameSoldier soldier, int dmg) {	
-		Point hitPlace = new Point();
-		hitPlace.setLocation(soldier.getPosition().getX() + soldier.getSpeedVector().getDirection().getX()*SpriteSize,
-				soldier.getPosition().getY() + soldier.getSpeedVector().getDirection().getY()*SpriteSize);
-		for(GameEntity current : targets){
-			if (current instanceof GameSoldier && ((GameSoldier) current).getPosition().equals(hitPlace)){
-				((GameSoldier) current).parry(dmg);
-			}		
-			if (current instanceof Ghost && ((Ghost) current).getPosition().equals(hitPlace)){
-				universe.removeGameEntity(current);
+	public void strikeDone(GameSoldier soldier, int dmg) {		
+		Rectangle soldierBox = new Rectangle(soldier.getPosition(), new Dimension(SpriteSize, SpriteSize));
+		Rectangle hitBox = new Rectangle(soldierBox);
+		hitBox.translate((int)soldier.getSpeedVector().getDirection().getX()*SpriteSize,
+				(int)soldier.getSpeedVector().getDirection().getY()*SpriteSize);
+		hitBox.add(soldierBox);
+		for(GameMovable current : targets){
+			Rectangle targetHitbox = new Rectangle(current.getPosition(), new Dimension(SpriteSize, SpriteSize));
+			if (current instanceof GameSoldier){
+				GameSoldier target = (GameSoldier) current;
+				if(target != soldier && targetHitbox.intersects(hitBox)){			
+					target.parry(dmg);
+				}	
+			}
+			if (current instanceof Ghost){
+				Ghost target = (Ghost) current;
+				if(targetHitbox.intersects(hitBox)){
+					universe.removeGameEntity(target);
+				}
 			}
 		}
 	}
@@ -81,7 +93,7 @@ public class GameSoldierObserver implements Observer{
 		if (u instanceof GameSoldier)
 			brokenShield((GameSoldier)u);
 	}
-	
+
 	public void brokenShield(GameSoldier soldier) {
 		soldier.setSpriteState("");
 	}

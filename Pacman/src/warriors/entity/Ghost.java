@@ -23,17 +23,15 @@ public class Ghost extends GameMovable implements Drawable, GameEntity, Overlapp
 	private int damages = 1;
 	private boolean visible = false;
 	public static final int RENDERING_SIZE = 16;
-	protected DrawableImage hidden = null;
 
 	public Ghost(Canvas defaultCanvas,int x, int y) {
 		spriteManager = new SpriteManagerDefaultImpl("images/wizzrobe.gif",
 				defaultCanvas, RENDERING_SIZE, 8);
 		spriteManager.setTypes(
 				"left",
-				"up",
 				"right",
+				"up",
 				"down");
-		hidden = new DrawableImage("images/black.gif", defaultCanvas);
 		setPosition(new Point(x, y));
 	}
 
@@ -70,9 +68,6 @@ public class Ghost extends GameMovable implements Drawable, GameEntity, Overlapp
 			spriteManager.setType(spriteType);
 			spriteManager.draw(g, getPosition());
 			hide();
-		}
-		else{
-			g.drawImage(hidden.getImage(), (int)getPosition().getX(),  (int)getPosition().getY(), RENDERING_SIZE, RENDERING_SIZE, null);
 		}
 	}
 

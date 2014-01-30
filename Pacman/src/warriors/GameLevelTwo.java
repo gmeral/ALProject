@@ -1,12 +1,10 @@
-
-
 package warriors;
 
 
 import gameframework.game.CanvasDefaultImpl;
 import gameframework.game.Game;
-import gameframework.game.GameEntity;
 import gameframework.game.GameLevelDefaultImpl;
+import gameframework.game.GameMovable;
 import gameframework.game.GameMovableDriverDefaultImpl;
 import gameframework.game.GameUniverseDefaultImpl;
 import gameframework.game.GameUniverseViewPortDefaultImpl;
@@ -23,7 +21,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import pacman.rule.GhostMovableDriver;
 import warriors.customframework.MoveStrategyRandom;
 import warriors.entity.Floor;
 import warriors.entity.GameSoldier;
@@ -33,6 +30,7 @@ import warriors.entity.ShieldBonus;
 import warriors.entity.SwordBonus;
 import warriors.entity.Wall;
 import warriors.observers.GameSoldierObserver;
+import warriors.rule.GhostMovableDriver;
 import warriors.rule.WarriorMoveStrategy;
 import warriors.rule.WarriorsOverlapRules;
 
@@ -40,7 +38,7 @@ public class GameLevelTwo extends GameLevelDefaultImpl {
 	Canvas canvas;
 	private static final int MINIMUM_DELAY_BETWEEN_GAME_CYCLES = 40;
 	boolean stopGameLoop;
-	List<GameEntity> targets;
+	List<GameMovable> targets = new ArrayList();
 	// 0 : Pacgums; 1 : Walls; 2 : SuperPacgums; 3 : Doors; 4 : Jail; 5 : empty
 	// Note: teleportation points are not indicated since they are defined by
 	// directed pairs of positions.
@@ -94,8 +92,8 @@ public class GameLevelTwo extends GameLevelDefaultImpl {
 
 		gameBoard = new GameUniverseViewPortDefaultImpl(canvas, universe);
 		((CanvasDefaultImpl) canvas).setDrawingGameBoard(gameBoard);
-		targets = new ArrayList();
 		// Filling up the universe with basic non movable entities and inclusion in the universe
+		List<Ghost> ghosts= new ArrayList();
 		for (int i = 0; i < 31; ++i) {
 			for (int j = 0; j < 29; ++j) {
 				if (tab[i][j] == 0) {
@@ -125,10 +123,13 @@ public class GameLevelTwo extends GameLevelDefaultImpl {
 					ghostDriv.setmoveBlockerChecker(moveBlockerChecker);
 					myGhost = new Ghost(canvas,j * SPRITE_SIZE, i * SPRITE_SIZE);
 					myGhost.setDriver(ghostDriv);
-					universe.addGameEntity(myGhost);
+					ghosts.add(myGhost);
 					targets.add(myGhost);
 				}
 			}
+		}
+		for (Ghost g : ghosts){
+			universe.addGameEntity(g);
 		}
 
 
@@ -156,6 +157,8 @@ public class GameLevelTwo extends GameLevelDefaultImpl {
 		player2.setDriver(driver2);
 		universe.addGameEntity(player2);
 		targets.add(player2);
+		
+		obs.setTargets(targets);
 	}
 	public GameLevelTwo(Game g) {
 		super(g);
