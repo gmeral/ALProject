@@ -8,6 +8,7 @@ import warriors.proxy.HorseMan;
 import warriors.proxy.HovercraftMan;
 import warriors.proxy.InfantryMan;
 import warriors.proxy.Jedi;
+import warriors.weapon.Candle;
 import warriors.weapon.LaserSword;
 import warriors.weapon.MagneticShield;
 import warriors.weapon.Shield;
@@ -91,6 +92,12 @@ public class WarriorCount implements WarriorsVisitor {
 	@Override
 	public void visit(Jedi jedi) {
 		++nbLightUnit;
+	}
+
+	@Override
+	public void visit(Candle candle) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

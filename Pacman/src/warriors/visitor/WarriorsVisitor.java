@@ -5,6 +5,7 @@ import warriors.proxy.HorseMan;
 import warriors.proxy.HovercraftMan;
 import warriors.proxy.InfantryMan;
 import warriors.proxy.Jedi;
+import warriors.weapon.Candle;
 import warriors.weapon.LaserSword;
 import warriors.weapon.MagneticShield;
 import warriors.weapon.Shield;
@@ -21,5 +22,6 @@ public interface WarriorsVisitor {
 	public void visit(MagneticShield magneticShield);
 	public void visit(HovercraftMan hovercraftMan);
 	public void visit(Jedi jedi);
+	public void visit(Candle candle);
 	
 }
