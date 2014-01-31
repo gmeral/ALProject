@@ -11,7 +11,7 @@ abstract class DecoratedSoldier implements Soldier, ArmedSoldier{
 	protected Weapon item;
 	protected int weaponHealth;
 
-	protected DecoratedSoldier(Soldier s, Weapon w, int health) throws TooManyItemsException {
+	protected DecoratedSoldier(Soldier s, Weapon w) throws TooManyItemsException {
 		int nbItems = 0;
 		Soldier iterator = s;
 		while (iterator instanceof DecoratedSoldier){
@@ -23,7 +23,7 @@ abstract class DecoratedSoldier implements Soldier, ArmedSoldier{
 		else{
 			soldier = s;
 			item = w;
-			weaponHealth = health;
+			weaponHealth = w.getHealth();
 		}
 	}
 
@@ -90,6 +90,10 @@ abstract class DecoratedSoldier implements Soldier, ArmedSoldier{
 
 	public String getName() {
 		return soldier.getName();
+	}
+	
+	public int itemHealth(){
+		return weaponHealth;
 	}
 
 }

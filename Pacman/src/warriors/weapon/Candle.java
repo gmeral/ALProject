@@ -4,7 +4,8 @@ import warriors.soldier.Soldier;
 import warriors.visitor.WarriorsVisitor;
 
 public class Candle extends AbstractWeapon {
-
+	
+	public static final int candleHealth  = 1;
 	public static final int CandleStrengthBonus = 0;
 	public static final int CandleDamageReduction  = 0;
 	public static final int CandleSightRangeBonus  = 2;
@@ -21,6 +22,12 @@ public class Candle extends AbstractWeapon {
 	@Override
 	public void accept(WarriorsVisitor visitor) {
 		visitor.visit(this);
+	}
+
+
+	@Override
+	public int getHealth() {
+		return candleHealth;
 	}
 
 }

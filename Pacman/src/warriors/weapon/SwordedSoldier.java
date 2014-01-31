@@ -7,11 +7,9 @@ import warriors.soldier.Soldier;
 class SwordedSoldier extends DecoratedSoldier {
 
 	public static final int nbMaxShield = 1;
-	public static final int swordHealth = 5;
-	public static final int laserSwordHealth = 5;
 	
 	public SwordedSoldier(Soldier s, Sword sword) throws TooManyItemsException {
-		super(s, sword, swordHealth);
+		super(s, sword);
 		Soldier iterator = s;
 		while (iterator instanceof DecoratedSoldier){
 			if(iterator instanceof SwordedSoldier){
@@ -22,7 +20,7 @@ class SwordedSoldier extends DecoratedSoldier {
 	}
 
 	public SwordedSoldier(Soldier s, LaserSword laserSword) throws TooManyItemsException {
-		super(s, laserSword, laserSwordHealth);
+		super(s, laserSword);
 		Soldier iterator = s;
 		while (iterator instanceof DecoratedSoldier){
 			if(iterator instanceof SwordedSoldier){

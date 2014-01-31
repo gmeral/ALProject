@@ -5,6 +5,8 @@ import warriors.visitor.WarriorsVisitor;
 
 public class Shield extends AbstractWeapon {
 
+
+	public static final int shieldHealth  = 5;
 	public static final int shieldStrengthBonus = 0;
 	public static final int shieldSightRangeBonus = 0;
 	public static final int shieldDamageReduction  = 1;
@@ -23,6 +25,12 @@ public class Shield extends AbstractWeapon {
 	@Override
 	public void accept(WarriorsVisitor visitor) {
 		visitor.visit(this);
+	}
+
+
+	@Override
+	public int getHealth() {
+		return shieldHealth;
 	}
 
 }

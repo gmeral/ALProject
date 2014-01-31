@@ -11,4 +11,5 @@ public interface Weapon {
 	
 	public ArmedSoldier getDeco(Soldier s) throws TooManyItemsException;
 	public void accept(WarriorsVisitor visitor);
+	public int getHealth();
 }

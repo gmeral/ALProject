@@ -5,6 +5,7 @@ import warriors.visitor.WarriorsVisitor;
 
 public class MagneticShield extends AbstractWeapon {
 
+	public static final int magneticShieldHealth  = 5;
 	public static final int magneticShieldStrengthBonus = 0;
 	public static final int magneticShieldSightRangeBonus = 0;
 	public static final int magneticShieldDamageReduction  = 2;
@@ -23,6 +24,12 @@ public class MagneticShield extends AbstractWeapon {
 	@Override
 	public void accept(WarriorsVisitor visitor) {
 		visitor.visit(this);
+	}
+
+
+	@Override
+	public int getHealth() {
+		return magneticShieldHealth;
 	}
 
 }

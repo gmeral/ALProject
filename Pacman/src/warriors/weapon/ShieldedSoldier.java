@@ -8,11 +8,10 @@ import warriors.soldier.Soldier;
 class ShieldedSoldier extends DecoratedSoldier {
 
 
-	public static final int shieldHealth  = 5;
 	public static final int magneticShieldHealth  = 5;
 
 	public ShieldedSoldier(Soldier s, Shield shield) throws TooManyItemsException {
-		super(s, shield, shieldHealth);
+		super(s, shield);
 		Soldier iterator = s;
 		while (iterator instanceof DecoratedSoldier){
 			if(iterator instanceof ShieldedSoldier){
@@ -23,7 +22,7 @@ class ShieldedSoldier extends DecoratedSoldier {
 	}
 
 	public ShieldedSoldier(Soldier s, MagneticShield magneticShield) throws TooManyItemsException {
-		super(s, magneticShield, shieldHealth);
+		super(s, magneticShield);
 		Soldier iterator = s;
 		while (iterator instanceof DecoratedSoldier){
 			if(iterator instanceof ShieldedSoldier){
