@@ -47,10 +47,12 @@ public class GameSoldierObserver implements Observer{
 
 	public void strikeDone(GameSoldier soldier, int dmg) {		
 		Rectangle soldierBox = new Rectangle(soldier.getPosition(), new Dimension(SpriteSize, SpriteSize));
+	
 		Rectangle hitBox = new Rectangle(soldierBox);
 		hitBox.translate((int)soldier.getSpeedVector().getDirection().getX()*SpriteSize,
 				(int)soldier.getSpeedVector().getDirection().getY()*SpriteSize);
 		hitBox.add(soldierBox);
+		
 		for(GameMovable current : targets){
 			Rectangle targetHitbox = new Rectangle(current.getPosition(), new Dimension(SpriteSize, SpriteSize));
 			if (current instanceof GameSoldier){

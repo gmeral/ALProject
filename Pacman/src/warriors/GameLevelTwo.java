@@ -26,6 +26,7 @@ import warriors.entity.Floor;
 import warriors.entity.GameSoldier;
 import warriors.entity.Ghost;
 import warriors.entity.HolyGrailBonus;
+import warriors.entity.SafeZone;
 import warriors.entity.ShieldBonus;
 import warriors.entity.SwordBonus;
 import warriors.entity.Wall;
@@ -44,9 +45,9 @@ public class GameLevelTwo extends GameLevelDefaultImpl {
 	// directed pairs of positions.
 	static int[][] tab = { 
 		{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-		{ 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1 },
-		{ 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1 },
-		{ 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 2, 0, 2, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1 },
+		{ 1, 6, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 6, 1 },
+		{ 1, 6, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 6, 1 },
+		{ 1, 6, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 2, 0, 2, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 6, 1 },
 		{ 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1 },
 		{ 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1 },
 		{ 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1 },
@@ -125,6 +126,9 @@ public class GameLevelTwo extends GameLevelDefaultImpl {
 					myGhost.setDriver(ghostDriv);
 					ghosts.add(myGhost);
 					targets.add(myGhost);
+				}
+				if (tab[i][j] == 6) {
+					universe.addGameEntity(new SafeZone(canvas, j * SPRITE_SIZE, i * SPRITE_SIZE));
 				}
 			}
 		}

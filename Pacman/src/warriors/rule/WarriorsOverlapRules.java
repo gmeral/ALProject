@@ -13,6 +13,7 @@ import warriors.entity.Floor;
 import warriors.entity.GameSoldier;
 import warriors.entity.Ghost;
 import warriors.entity.HolyGrailBonus;
+import warriors.entity.SafeZone;
 import warriors.entity.ShieldBonus;
 import warriors.entity.SwordBonus;
 
@@ -76,6 +77,10 @@ public class WarriorsOverlapRules extends OverlapRulesApplierDefaultImpl {
 	}
 	
 	public void overlapRule(GameSoldier player,GameSoldier player2) {
+	}
+	
+	public void overlapRule(GameSoldier player, SafeZone zone) {
+		player.setInvincible(1);
 	}
 	
 	public void overlapRule(GameSoldier player,Floor floor) {
