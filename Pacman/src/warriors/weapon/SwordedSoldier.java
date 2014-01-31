@@ -6,7 +6,7 @@ import warriors.soldier.Soldier;
 
 class SwordedSoldier extends DecoratedSoldier {
 
-
+	public static final int nbMaxShield = 1;
 	public static final int swordHealth = 5;
 	public static final int laserSwordHealth = 5;
 	

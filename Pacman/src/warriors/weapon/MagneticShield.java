@@ -5,12 +5,13 @@ import warriors.visitor.WarriorsVisitor;
 
 public class MagneticShield extends AbstractWeapon {
 
-	public static final int MagneticShieldStrengthBonus = 0;
-	public static final int MagneticShieldDamageReduction  = 2;
+	public static final int magneticShieldStrengthBonus = 0;
+	public static final int magneticShieldSightRangeBonus = 0;
+	public static final int magneticShieldDamageReduction  = 2;
 	
 	
 	public MagneticShield(){
-		super(MagneticShieldStrengthBonus,MagneticShieldDamageReduction);
+		super(magneticShieldStrengthBonus,magneticShieldDamageReduction, magneticShieldSightRangeBonus);
 	}
 	
 

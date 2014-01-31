@@ -8,19 +8,6 @@ abstract class DecoratedSoldier implements Soldier, ArmedSoldier{
 
 	public static final int nbMaxItem = 2;
 	protected Soldier soldier;
-	public Soldier getSoldier() {
-		return soldier;
-	}
-
-
-	public void setSoldier(Soldier soldier) {
-		this.soldier = soldier;
-	}
-	
-	public int getSightRange() {
-		return soldier.getSightRange();
-	}
-
 	protected Weapon item;
 	protected int weaponHealth;
 
@@ -44,7 +31,19 @@ abstract class DecoratedSoldier implements Soldier, ArmedSoldier{
 	public Weapon getWeapon(){
 		return item;
 	}
+	
+	public Soldier getSoldier() {
+		return soldier;
+	}
 
+
+	public void setSoldier(Soldier soldier) {
+		this.soldier = soldier;
+	}
+	
+	public int getSightRange() {
+		return item.getSightRangeBonus() + soldier.getSightRange();
+	}
 
 	public int parry(int damages) throws BrokenItemException, DeadSoldierException {
 		int damageReduction;

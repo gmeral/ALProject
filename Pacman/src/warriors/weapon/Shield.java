@@ -5,12 +5,13 @@ import warriors.visitor.WarriorsVisitor;
 
 public class Shield extends AbstractWeapon {
 
-	public static final int ShieldStrengthBonus = 0;
-	public static final int ShieldDamageReduction  = 1;
+	public static final int shieldStrengthBonus = 0;
+	public static final int shieldSightRangeBonus = 0;
+	public static final int shieldDamageReduction  = 1;
 	
 	
 	public Shield(){
-		super(ShieldStrengthBonus,ShieldDamageReduction);
+		super(shieldStrengthBonus,shieldDamageReduction, shieldSightRangeBonus);
 	}
 	
 

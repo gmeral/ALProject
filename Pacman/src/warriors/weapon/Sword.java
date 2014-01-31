@@ -5,12 +5,13 @@ import warriors.visitor.WarriorsVisitor;
 
 public class Sword extends AbstractWeapon{
 
-	public static final int SwordStrengthBonus = 1;
-	public static final int SwordDamageReduction  = 0;
+	public static final int swordStrengthBonus = 1;
+	public static final int swordDamageReduction  = 0;
+	public static final int swordSightRangeBonus  = 0;
 	
 	
 	public Sword() {
-		super(SwordStrengthBonus, SwordDamageReduction);
+		super(swordStrengthBonus, swordDamageReduction, swordSightRangeBonus);
 	}
 
 

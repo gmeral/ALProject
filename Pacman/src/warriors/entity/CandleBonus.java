@@ -4,23 +4,23 @@ import gameframework.base.DrawableImage;
 
 import java.awt.Canvas;
 
-import warriors.weapon.Shield;
+import warriors.weapon.Candle;
 import warriors.weapon.TooManyItemsException;
 
-public class ShieldBonus extends AbstractBonus {
-	public ShieldBonus(Canvas canvas, int x, int y) {
-		super(canvas, x, y, new DrawableImage("images/shield.gif", canvas));
+public class CandleBonus extends AbstractBonus {
+
+	public CandleBonus(Canvas canvas, int x, int y) {
+		super(canvas, x, y, new DrawableImage("images/candle.gif", canvas));
 	}
 
 	@Override
 	public boolean applyBonus(GameSoldier gs) {
 		try {
-			gs.addWeapon(new Shield());
+			gs.addWeapon(new Candle());
 		} catch (TooManyItemsException e) {
 			return false;
 		}
-		return true;
+		return false;
 	}
-	
-	
+
 }
