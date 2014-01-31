@@ -87,8 +87,8 @@ public class WarriorsOverlapRules extends OverlapRulesApplierDefaultImpl {
 	}
 	
 	public void overlapRule(GameSoldier player, SafeZone zone) {
-		player.setInvincible(1);
-	}
+		player.setInvincible(5);
+	}	
 	
 	public void overlapRule(GameSoldier player,Floor floor) {
 	}
