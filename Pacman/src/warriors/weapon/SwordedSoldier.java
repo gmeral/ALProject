@@ -12,10 +12,24 @@ class SwordedSoldier extends DecoratedSoldier {
 	
 	public SwordedSoldier(Soldier s, Sword sword) throws TooManyItemsException {
 		super(s, sword, swordHealth);
+		Soldier iterator = s;
+		while (iterator instanceof DecoratedSoldier){
+			if(iterator instanceof SwordedSoldier){
+				throw new TooManyItemsException("only one shield allowed");
+			}
+			iterator = ((DecoratedSoldier)iterator).soldier;
+		}
 	}
 
 	public SwordedSoldier(Soldier s, LaserSword laserSword) throws TooManyItemsException {
 		super(s, laserSword, laserSwordHealth);
+		Soldier iterator = s;
+		while (iterator instanceof DecoratedSoldier){
+			if(iterator instanceof SwordedSoldier){
+				throw new TooManyItemsException("only one shield allowed");
+			}
+			iterator = ((DecoratedSoldier)iterator).soldier;
+		}
 	}
 
 	public int strike() throws BrokenItemException{		

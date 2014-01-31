@@ -20,7 +20,7 @@ public class CandleBonus extends AbstractBonus {
 		} catch (TooManyItemsException e) {
 			return false;
 		}
-		return false;
+		return true;
 	}
 
 }

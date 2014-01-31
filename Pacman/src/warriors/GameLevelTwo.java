@@ -23,6 +23,7 @@ import java.util.List;
 
 import warriors.customframework.MoveStrategyRandom;
 import warriors.customframework.WarriorsGameImpl;
+import warriors.entity.CandleBonus;
 import warriors.entity.Floor;
 import warriors.entity.GameSoldier;
 import warriors.entity.Ghost;
@@ -52,7 +53,7 @@ public class GameLevelTwo extends GameLevelDefaultImpl {
 		{ 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1 },
 		{ 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1 },
 		{ 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1 },
-		{ 1, 0, 1, 3, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 5, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 3, 1, 0, 1 },
+		{ 1, 0, 1, 3, 7, 0, 1, 0, 1, 1, 0, 1, 1, 0, 5, 0, 1, 1, 0, 1, 1, 0, 1, 0, 7, 3, 1, 0, 1 },
 		{ 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1 },
 		{ 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1 },
 		{ 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1 },
@@ -130,6 +131,10 @@ public class GameLevelTwo extends GameLevelDefaultImpl {
 				}
 				if (tab[i][j] == 6) {
 					universe.addGameEntity(new SafeZone(canvas, j * SPRITE_SIZE, i * SPRITE_SIZE));
+				}		
+				if (tab[i][j] == 7) {
+					universe.addGameEntity(new Floor(canvas, j * SPRITE_SIZE, i * SPRITE_SIZE));
+					universe.addGameEntity(new CandleBonus(canvas,j * SPRITE_SIZE, i * SPRITE_SIZE));
 				}
 			}
 		}

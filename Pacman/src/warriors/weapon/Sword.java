@@ -12,6 +12,7 @@ public class Sword extends AbstractWeapon{
 	
 	public Sword() {
 		super(swordStrengthBonus, swordDamageReduction, swordSightRangeBonus);
+	
 	}
 
 

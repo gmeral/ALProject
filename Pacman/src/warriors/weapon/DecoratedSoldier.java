@@ -6,7 +6,7 @@ import warriors.visitor.WarriorsVisitor;
 
 abstract class DecoratedSoldier implements Soldier, ArmedSoldier{
 
-	public static final int nbMaxItem = 2;
+	public static final int nbMaxItem = 3;
 	protected Soldier soldier;
 	protected Weapon item;
 	protected int weaponHealth;

@@ -9,9 +9,10 @@ public abstract class AbstractWeapon implements Weapon {
 	protected int damageReduction;
 	protected int sightRangeBonus;
 	
-	public AbstractWeapon(int strength, int armor, int candlerangesightbonus) {
+	public AbstractWeapon(int strength, int armor, int sightRange) {
 		strengthBonus = strength;
 		damageReduction = armor;
+		sightRangeBonus = sightRange;
 	}
 
 

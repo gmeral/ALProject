@@ -18,7 +18,6 @@ public class Candle extends AbstractWeapon {
 		return new CandledSoldier(s, this);
 	}
 
-
 	@Override
 	public void accept(WarriorsVisitor visitor) {
 		visitor.visit(this);

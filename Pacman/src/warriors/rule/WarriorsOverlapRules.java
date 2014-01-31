@@ -9,6 +9,7 @@ import java.awt.Point;
 import java.util.Vector;
 
 import warriors.entity.AbstractBonus;
+import warriors.entity.CandleBonus;
 import warriors.entity.Floor;
 import warriors.entity.GameSoldier;
 import warriors.entity.Ghost;
@@ -50,10 +51,16 @@ public class WarriorsOverlapRules extends OverlapRulesApplierDefaultImpl {
 		managePacmanDeath = true;
 		super.applyOverlapRules(overlappables);
 	}
-	
+
 	public void overlapRule(GameSoldier player,ShieldBonus bonus){
 		if(bonus.applyBonus(player)) {
 			player.setSpriteState("shield+");
+			universe.removeGameEntity(bonus);
+		}
+	}
+	
+	public void overlapRule(GameSoldier player,CandleBonus bonus){
+		if(bonus.applyBonus(player)) {
 			universe.removeGameEntity(bonus);
 		}
 	}

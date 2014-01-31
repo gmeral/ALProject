@@ -7,6 +7,8 @@ import gameframework.game.GameEntity;
 
 public class DisplayBarEntity implements GameEntity, Drawable{
 
+	
+	
 	@Override
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
