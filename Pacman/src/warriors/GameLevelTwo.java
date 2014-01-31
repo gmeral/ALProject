@@ -22,6 +22,7 @@ import java.util.Date;
 import java.util.List;
 
 import warriors.customframework.MoveStrategyRandom;
+import warriors.customframework.WarriorsGameImpl;
 import warriors.entity.Floor;
 import warriors.entity.GameSoldier;
 import warriors.entity.Ghost;
@@ -75,7 +76,7 @@ public class GameLevelTwo extends GameLevelDefaultImpl {
 		{ 1, 0, 3, 2, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 2, 3, 0, 1 },
 		{ 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 2, 1, 2, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 },
 		{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 } };
-	public static final int SPRITE_SIZE = 16;
+	public static final int SPRITE_SIZE = WarriorsGameImpl.GLOBAL_SPRITE_SIZE;
 
 	@Override
 	protected void init() {
@@ -95,8 +96,8 @@ public class GameLevelTwo extends GameLevelDefaultImpl {
 		((CanvasDefaultImpl) canvas).setDrawingGameBoard(gameBoard);
 		// Filling up the universe with basic non movable entities and inclusion in the universe
 		List<Ghost> ghosts= new ArrayList();
-		for (int i = 0; i < 31; ++i) {
-			for (int j = 0; j < 29; ++j) {
+		for (int i = 0; i < WarriorsGameImpl.FRAME_NB_ROWS; ++i) {
+			for (int j = 0; j < WarriorsGameImpl.FRAME_NB_COLUMNS; ++j) {
 				if (tab[i][j] == 0) {
 					universe.addGameEntity(new Floor(canvas, j * SPRITE_SIZE, i * SPRITE_SIZE));
 				}

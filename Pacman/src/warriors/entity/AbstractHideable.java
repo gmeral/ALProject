@@ -7,6 +7,8 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
 
+import warriors.customframework.WarriorsGameImpl;
+
 public abstract class AbstractHideable implements Hideable{
 	
 	boolean visible=false;
@@ -14,7 +16,7 @@ public abstract class AbstractHideable implements Hideable{
 	protected DrawableImage hidden = null;
 	
 	protected int x, y;
-	public static final int RENDERING_SIZE = 16;
+	public static final int RENDERING_SIZE = WarriorsGameImpl.GLOBAL_SPRITE_SIZE;
 	
 	
 	public AbstractHideable(Canvas defaultCanvas, int xx, int yy, DrawableImage drawableImage) {

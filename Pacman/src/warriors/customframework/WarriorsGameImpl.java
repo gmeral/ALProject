@@ -22,9 +22,9 @@ import gameframework.game.GameDefaultImpl;
 public class WarriorsGameImpl extends GameDefaultImpl{
 
 	private Frame f;
-	protected static final int NB_ROWS = 31;
-	protected static final int NB_COLUMNS = 29;
-	protected static final int SPRITE_SIZE = 16;
+	public static final int FRAME_NB_ROWS = 31;
+	public static final int FRAME_NB_COLUMNS = 29;
+	public static final int GLOBAL_SPRITE_SIZE = 16;
 
 	private void createMenuBar() {
 		MenuBar menuBar = new MenuBar();
@@ -105,7 +105,7 @@ public class WarriorsGameImpl extends GameDefaultImpl{
 		Container c = createStatusBar();
 
 		defaultCanvas = new CanvasDefaultImpl();
-		defaultCanvas.setSize(SPRITE_SIZE * NB_COLUMNS, SPRITE_SIZE * NB_ROWS);
+		defaultCanvas.setSize(GLOBAL_SPRITE_SIZE * FRAME_NB_COLUMNS, GLOBAL_SPRITE_SIZE * FRAME_NB_ROWS);
 		f.add(defaultCanvas);
 		f.add(c, BorderLayout.NORTH);
 		f.pack();

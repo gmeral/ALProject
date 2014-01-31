@@ -9,7 +9,7 @@ import warriors.weapon.TooManyItemsException;
 
 public class ShieldBonus extends AbstractBonus {
 	public ShieldBonus(Canvas canvas, int x, int y) {
-		super(canvas, x, y, new DrawableImage("images/shield.gif", canvas)); //TODO image de bouclier
+		super(canvas, x, y, new DrawableImage("images/shield.gif", canvas));
 	}
 
 	@Override

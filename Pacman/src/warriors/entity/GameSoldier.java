@@ -14,6 +14,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import warriors.army.Unit;
+import warriors.customframework.WarriorsGameImpl;
 import warriors.customframework.WarriorsSpriteManagerImpl;
 import warriors.observers.GameSoldierObserver;
 import warriors.observers.Observer;
@@ -27,7 +28,7 @@ import warriors.weapon.Weapon;
 
 public class GameSoldier extends GameMovable implements GameEntity, Drawable, Overlappable, Unit, KeyListener{
 	private SoldierProxy soldier;
-	public static final int RENDERING_SIZE = 16;
+	public static final int RENDERING_SIZE = WarriorsGameImpl.GLOBAL_SPRITE_SIZE;
 	public static final int SPRITE_SIZE = 16;
 	public static final int[] SPRITE_ROWS ={4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,  4, 4, 4, 4, 4, 4, 4, 4,4};
 	protected final SpriteManager spriteManager;
@@ -97,7 +98,7 @@ public class GameSoldier extends GameMovable implements GameEntity, Drawable, Ov
 		int strength = soldier.strike();
 		if (strength > 0)
 			soldier.notifyStrike(this, strength);
-		return strength; //TODO gestion des sprites de strike.
+		return strength;
 	}
 
 	@Override

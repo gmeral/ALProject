@@ -12,6 +12,8 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
 
+import warriors.customframework.WarriorsGameImpl;
+
 public class Ghost extends GameMovable implements Drawable, GameEntity, Overlappable, Hideable {
 
 	protected static DrawableImage image = null;
@@ -22,7 +24,7 @@ public class Ghost extends GameMovable implements Drawable, GameEntity, Overlapp
 	private final SpriteManagerDefaultImpl spriteManager;
 	private int damages = 1;
 	private boolean visible = false;
-	public static final int RENDERING_SIZE = 16;
+	public static final int RENDERING_SIZE = WarriorsGameImpl.GLOBAL_SPRITE_SIZE;
 
 	public Ghost(Canvas defaultCanvas,int x, int y) {
 		spriteManager = new SpriteManagerDefaultImpl("images/wizzrobe.gif",

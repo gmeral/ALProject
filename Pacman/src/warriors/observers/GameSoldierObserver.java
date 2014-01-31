@@ -13,6 +13,7 @@ import java.util.List;
 
 import warriors.GameLevelOne;
 import warriors.army.Unit;
+import warriors.customframework.WarriorsGameImpl;
 import warriors.entity.GameSoldier;
 import warriors.entity.Ghost;
 import warriors.entity.Hideable;
@@ -20,7 +21,7 @@ import warriors.entity.Hideable;
 
 public class GameSoldierObserver implements Observer{
 
-	public static final int SpriteSize = 16;
+	public static final int SpriteSize = WarriorsGameImpl.GLOBAL_SPRITE_SIZE;
 	private GameUniverse universe;
 	List<GameMovable> targets;
 	public GameSoldierObserver(GameUniverse univ){
