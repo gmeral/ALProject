@@ -6,6 +6,7 @@ abstract class AbstractSoldier implements Soldier {
 
 	private int strength;
 	private int healthPoints;
+	private int maxHealthPoints;
 	private int sightRange;
 	private String name;
 	static protected int peonID = 0;
@@ -14,6 +15,7 @@ abstract class AbstractSoldier implements Soldier {
 	protected AbstractSoldier(int str, int hp) {
 		strength = str;
 		healthPoints = hp;
+		maxHealthPoints = hp;
 		sightRange = INITIAL_SIGHTRANGE;
 	}
 		
@@ -21,6 +23,7 @@ abstract class AbstractSoldier implements Soldier {
 		name = s;
 		strength = str;
 		healthPoints = hp;
+		maxHealthPoints = hp;
 		sightRange = INITIAL_SIGHTRANGE;
 	}
 	
@@ -56,5 +59,12 @@ abstract class AbstractSoldier implements Soldier {
 	
 	public int getSightRange() {
 		return sightRange;
+	}
+	
+	public int getMaxHealth(){
+		return maxHealthPoints;
+	}
+	public int getCurrentHealth(){
+		return healthPoints;
 	}
 }
