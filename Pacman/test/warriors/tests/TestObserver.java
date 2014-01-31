@@ -5,16 +5,16 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import warriors.army.Squad;
-import warriors.army.Unit;
-import warriors.observers.FightObserver;
-import warriors.proxy.InfantryMan;
-import warriors.soldier.DeadSoldierException;
-import warriors.weapon.BrokenItemException;
-import warriors.weapon.Shield;
-import warriors.weapon.Sword;
-import warriors.weapon.TooManyItemsException;
-import warriors.weapon.Weapon;
+import triforce.army.Squad;
+import triforce.army.Unit;
+import triforce.observers.FightObserver;
+import triforce.proxy.InfantryMan;
+import triforce.soldier.DeadSoldierException;
+import triforce.weapon.BrokenItemException;
+import triforce.weapon.Shield;
+import triforce.weapon.Sword;
+import triforce.weapon.TooManyItemsException;
+import triforce.weapon.Weapon;
 
 public class TestObserver {
 

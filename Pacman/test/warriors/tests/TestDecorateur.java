@@ -5,11 +5,11 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import warriors.soldier.HorseManImpl;
-import warriors.soldier.Soldier;
-import warriors.weapon.Sword;
-import warriors.weapon.TooManyItemsException;
-import warriors.weapon.Weapon;
+import triforce.soldier.HorseManImpl;
+import triforce.soldier.Soldier;
+import triforce.weapon.Sword;
+import triforce.weapon.TooManyItemsException;
+import triforce.weapon.Weapon;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestDecorateur{

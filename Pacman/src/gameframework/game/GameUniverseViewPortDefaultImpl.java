@@ -8,7 +8,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.util.Iterator;
 
-import warriors.entity.Wall;
+import triforce.entity.Wall;
 
 public class GameUniverseViewPortDefaultImpl implements GameUniverseViewPort {
 	private Image buffer;

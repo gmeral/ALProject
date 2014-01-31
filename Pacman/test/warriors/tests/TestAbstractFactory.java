@@ -4,13 +4,13 @@ package warriors.tests;
 import org.junit.Assert;
 import org.junit.Test;
 
-import warriors.army.Squad;
-import warriors.army.Unit;
-import warriors.factory.AbstractWarFactory;
-import warriors.factory.MiddleAgeWarFactory;
-import warriors.factory.SFWarFactory;
-import warriors.weapon.TooManyItemsException;
-import warriors.weapon.Weapon;
+import triforce.army.Squad;
+import triforce.army.Unit;
+import triforce.factory.AbstractWarFactory;
+import triforce.factory.MiddleAgeWarFactory;
+import triforce.factory.SFWarFactory;
+import triforce.weapon.TooManyItemsException;
+import triforce.weapon.Weapon;
 
 public class TestAbstractFactory {
 	@Test

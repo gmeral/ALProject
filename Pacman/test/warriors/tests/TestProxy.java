@@ -5,13 +5,13 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import warriors.army.Unit;
-import warriors.proxy.SoldierProxy;
-import warriors.soldier.InfantryManImpl;
-import warriors.weapon.Shield;
-import warriors.weapon.Sword;
-import warriors.weapon.TooManyItemsException;
-import warriors.weapon.Weapon;
+import triforce.army.Unit;
+import triforce.proxy.SoldierProxy;
+import triforce.soldier.InfantryManImpl;
+import triforce.weapon.Shield;
+import triforce.weapon.Sword;
+import triforce.weapon.TooManyItemsException;
+import triforce.weapon.Weapon;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestProxy {

@@ -7,16 +7,16 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import warriors.army.Squad;
-import warriors.proxy.HorseMan;
-import warriors.proxy.InfantryMan;
-import warriors.visitor.WarriorCount;
-import warriors.visitor.WarriorDisplay;
-import warriors.visitor.WarriorsVisitor;
-import warriors.weapon.Shield;
-import warriors.weapon.Sword;
-import warriors.weapon.TooManyItemsException;
-import warriors.weapon.Weapon;
+import triforce.army.Squad;
+import triforce.proxy.HorseMan;
+import triforce.proxy.InfantryMan;
+import triforce.visitor.WarriorCount;
+import triforce.visitor.WarriorDisplay;
+import triforce.visitor.WarriorsVisitor;
+import triforce.weapon.Shield;
+import triforce.weapon.Sword;
+import triforce.weapon.TooManyItemsException;
+import triforce.weapon.Weapon;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestVisitor {

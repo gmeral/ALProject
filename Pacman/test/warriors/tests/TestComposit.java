@@ -5,17 +5,17 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import warriors.army.Squad;
-import warriors.army.Unit;
-import warriors.proxy.SoldierProxy;
-import warriors.soldier.DeadSoldierException;
-import warriors.soldier.HorseManImpl;
-import warriors.soldier.InfantryManImpl;
-import warriors.weapon.BrokenItemException;
-import warriors.weapon.Shield;
-import warriors.weapon.Sword;
-import warriors.weapon.TooManyItemsException;
-import warriors.weapon.Weapon;
+import triforce.army.Squad;
+import triforce.army.Unit;
+import triforce.proxy.SoldierProxy;
+import triforce.soldier.DeadSoldierException;
+import triforce.soldier.HorseManImpl;
+import triforce.soldier.InfantryManImpl;
+import triforce.weapon.BrokenItemException;
+import triforce.weapon.Shield;
+import triforce.weapon.Sword;
+import triforce.weapon.TooManyItemsException;
+import triforce.weapon.Weapon;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestComposit {
