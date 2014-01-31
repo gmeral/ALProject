@@ -31,8 +31,8 @@ public class Ghost extends GameMovable implements Drawable, GameEntity, Overlapp
 				defaultCanvas, RENDERING_SIZE, 8);
 		spriteManager.setTypes(
 				"left",
-				"right",
 				"up",
+				"right",
 				"down");
 		setPosition(new Point(x, y));
 	}

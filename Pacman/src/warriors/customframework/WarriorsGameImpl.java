@@ -22,7 +22,7 @@ import gameframework.game.GameDefaultImpl;
 public class WarriorsGameImpl extends GameDefaultImpl{
 
 	private Frame f;
-	public static final int FRAME_NB_ROWS = 31;
+	public static final int FRAME_NB_ROWS = 32;
 	public static final int FRAME_NB_COLUMNS = 29;
 	public static final int GLOBAL_SPRITE_SIZE = 16;
 

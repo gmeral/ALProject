@@ -41,4 +41,9 @@ class ShieldedSoldier extends DecoratedSoldier {
 		return ("je porte un bouclier ") + super.toString();
 	}
 
+	@Override
+	public int getNbRemainingStrike() {
+		return super.getNbRemainingStrike();
+	}
+
 }

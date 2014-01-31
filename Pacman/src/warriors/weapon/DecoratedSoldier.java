@@ -27,7 +27,7 @@ abstract class DecoratedSoldier implements Soldier, ArmedSoldier{
 		}
 	}
 
-
+	
 	public Weapon getWeapon(){
 		return item;
 	}
@@ -44,27 +44,33 @@ abstract class DecoratedSoldier implements Soldier, ArmedSoldier{
 	public int getSightRange() {
 		return item.getSightRangeBonus() + soldier.getSightRange();
 	}
+	
+	@Override
+	public int getNbRemainingStrike() {
+		return soldier.getNbRemainingStrike();
+	}
 
 	public int parry(int damages) throws BrokenItemException, DeadSoldierException {
 		int damageReduction;
 		int reducedDamages = damages - item.getDamageReduction();
 		if (weaponHealth == 0){
-			throw new BrokenItemException("Broken Item",soldier);
+			throw new BrokenItemException("Broken Item",soldier, item.getDamageReduction());
 		}
 		else{
 			try{
 				damageReduction = soldier.parry((reducedDamages > 0 ? reducedDamages : 0));
 			}catch(BrokenItemException e){
 				soldier = e.nextItem();
-				damageReduction = parry((reducedDamages > 0 ? reducedDamages : 0));
+				damageReduction = parry((reducedDamages > 0 ? reducedDamages : 0)+e.getStrength());
 			}
 		}
 		return damageReduction + reducedDamages;
 	}
 
 	public int strike() throws BrokenItemException{
+		
 		if (weaponHealth == 0){
-			throw new BrokenItemException("Broken Item",soldier);
+			throw new BrokenItemException("Broken Item",soldier, item.getStrenghtBonus());
 		}
 		else{
 			try {
@@ -72,7 +78,7 @@ abstract class DecoratedSoldier implements Soldier, ArmedSoldier{
 				return  damages + item.getStrenghtBonus();
 			} catch (BrokenItemException e) {
 				soldier = e.nextItem();
-				return strike();
+				return strike() + e.getStrength();
 			}
 		}
 	}

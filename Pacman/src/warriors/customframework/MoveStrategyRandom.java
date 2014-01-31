@@ -13,16 +13,16 @@ import java.util.Random;
  */
 public class MoveStrategyRandom implements MoveStrategy {
 	SpeedVector currentMove = new SpeedVectorDefaultImpl(new Point(0, 0),2);
-	static Random random = new Random();
+	static Random random = new Random(System.currentTimeMillis());
 	private int movesStraight = 3;
 	
 
 	public SpeedVector getSpeedVector() {
 		int i =0;
-		if (movesStraight == 0){
+//		if (movesStraight == 0){
 			i = random.nextInt(5);
-			movesStraight = 3;
-		}
+//			movesStraight = 3;
+//		}
 		switch (i) {
 		case 0:
 			currentMove.setDirection(new Point(1, 0));
@@ -37,7 +37,7 @@ public class MoveStrategyRandom implements MoveStrategy {
 			currentMove.setDirection(new Point(0, 1));
 			break;
 		}
-		movesStraight--;
+//		movesStraight--;
 		return currentMove;
 	}
 }

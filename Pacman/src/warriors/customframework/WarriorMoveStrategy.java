@@ -1,4 +1,4 @@
-package warriors.rule;
+package warriors.customframework;
 
 import gameframework.base.MoveStrategy;
 import gameframework.base.SpeedVector;

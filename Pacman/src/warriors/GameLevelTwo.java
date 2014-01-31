@@ -21,7 +21,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import warriors.customframework.GhostMovableDriver;
 import warriors.customframework.MoveStrategyRandom;
+import warriors.customframework.WarriorMoveStrategy;
 import warriors.customframework.WarriorsGameImpl;
 import warriors.entity.CandleBonus;
 import warriors.entity.Floor;
@@ -32,9 +34,8 @@ import warriors.entity.SafeZone;
 import warriors.entity.ShieldBonus;
 import warriors.entity.SwordBonus;
 import warriors.entity.Wall;
+import warriors.entity.displaybar.DisplayBarEntity;
 import warriors.observers.GameSoldierObserver;
-import warriors.rule.GhostMovableDriver;
-import warriors.rule.WarriorMoveStrategy;
 import warriors.rule.WarriorsOverlapRules;
 
 public class GameLevelTwo extends GameLevelDefaultImpl {
@@ -60,7 +61,7 @@ public class GameLevelTwo extends GameLevelDefaultImpl {
 		{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
 		{ 1, 0, 0, 0, 0, 0, 5, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 5, 0, 0, 0, 0, 0, 1 },
 		{ 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1 },
-		{ 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1 },
+		{ 1, 0, 0, 0, 5, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 5, 0, 0, 0, 1 },
 		{ 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 4, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1 },
 		{ 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1 },
 		{ 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 5, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1 },
@@ -97,7 +98,7 @@ public class GameLevelTwo extends GameLevelDefaultImpl {
 		((CanvasDefaultImpl) canvas).setDrawingGameBoard(gameBoard);
 		// Filling up the universe with basic non movable entities and inclusion in the universe
 		List<Ghost> ghosts= new ArrayList();
-		for (int i = 0; i < WarriorsGameImpl.FRAME_NB_ROWS; ++i) {
+		for (int i = 0; i < WarriorsGameImpl.FRAME_NB_ROWS-1; ++i) {
 			for (int j = 0; j < WarriorsGameImpl.FRAME_NB_COLUMNS; ++j) {
 				if (tab[i][j] == 0) {
 					universe.addGameEntity(new Floor(canvas, j * SPRITE_SIZE, i * SPRITE_SIZE));
@@ -168,6 +169,10 @@ public class GameLevelTwo extends GameLevelDefaultImpl {
 		universe.addGameEntity(player2);
 		targets.add(player2);
 		
+		DisplayBarEntity displayBar = new DisplayBarEntity(canvas);
+		displayBar.addPlayer(player1, "images/linkAvatar.gif");
+		displayBar.addPlayer(player2, "images/link2Avatar.gif");
+		universe.addGameEntity(displayBar);		
 		obs.setTargets(targets);
 	}
 	public GameLevelTwo(Game g) {

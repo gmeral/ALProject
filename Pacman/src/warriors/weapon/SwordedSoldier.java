@@ -6,7 +6,6 @@ import warriors.soldier.Soldier;
 
 class SwordedSoldier extends DecoratedSoldier {
 
-	public static final int nbMaxShield = 1;
 	
 	public SwordedSoldier(Soldier s, Sword sword) throws TooManyItemsException {
 		super(s, sword);
@@ -38,6 +37,11 @@ class SwordedSoldier extends DecoratedSoldier {
 	public String toString(){
 		return "je porte une épée " + super.toString();
 		
+	}
+
+	@Override
+	public int getNbRemainingStrike() {
+		return weaponHealth + super.getNbRemainingStrike();
 	}
 
 

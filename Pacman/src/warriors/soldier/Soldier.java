@@ -13,4 +13,5 @@ public interface Soldier {
 	int getSightRange();
 	int getMaxHealth();
 	int getCurrentHealth();
+	int getNbRemainingStrike();
 }

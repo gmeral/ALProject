@@ -17,4 +17,9 @@ public class CandledSoldier extends DecoratedSoldier{
 		}
 	}
 
+	@Override
+	public int getNbRemainingStrike() {
+		return super.getNbRemainingStrike();
+	}
+
 }

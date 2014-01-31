@@ -20,15 +20,19 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import warriors.customframework.GhostMovableDriver;
+import warriors.customframework.MoveStrategyRandom;
+import warriors.customframework.WarriorMoveStrategy;
 import warriors.customframework.WarriorsGameImpl;
 import warriors.entity.Floor;
 import warriors.entity.GameSoldier;
+import warriors.entity.Ghost;
 import warriors.entity.HolyGrailBonus;
 import warriors.entity.ShieldBonus;
 import warriors.entity.SwordBonus;
 import warriors.entity.Wall;
+import warriors.entity.displaybar.DisplayBarEntity;
 import warriors.observers.GameSoldierObserver;
-import warriors.rule.WarriorMoveStrategy;
 import warriors.rule.WarriorsOverlapRules;
 
 public class GameLevelOne extends GameLevelDefaultImpl {
@@ -53,9 +57,9 @@ public class GameLevelOne extends GameLevelDefaultImpl {
 		{ 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1 },
 		{ 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1 },
 		{ 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 3, 3, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1 },
-		{ 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1 },
-		{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 4, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-		{ 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1 },
+		{ 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 5, 0, 0, 5, 0, 5, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1 },
+		{ 1, 0, 0, 0, 0, 0, 5, 0, 0, 0, 1, 5, 0, 0, 4, 0, 5, 1, 0, 0, 0, 5, 0, 0, 0, 0, 0, 1 },
+		{ 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 5, 0, 0, 5, 0, 5, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1 },
 		{ 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1 },
 		{ 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1 },
 		{ 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1 },
@@ -92,7 +96,8 @@ public class GameLevelOne extends GameLevelDefaultImpl {
 		((CanvasDefaultImpl) canvas).setDrawingGameBoard(gameBoard);
 
 		// Filling up the universe with basic non movable entities and inclusion in the universe
-		for (int i = 0; i < WarriorsGameImpl.FRAME_NB_ROWS; ++i) {
+		List<Ghost> ghosts= new ArrayList();
+		for (int i = 0; i < WarriorsGameImpl.FRAME_NB_ROWS-1; ++i) {
 			for (int j = 0; j < WarriorsGameImpl.FRAME_NB_COLUMNS-1; ++j) {
 				if (tab[i][j] == 0) {
 					universe.addGameEntity(new Floor(canvas, j * SPRITE_SIZE, i * SPRITE_SIZE));
@@ -112,9 +117,23 @@ public class GameLevelOne extends GameLevelDefaultImpl {
 					universe.addGameEntity(new Floor(canvas, j * SPRITE_SIZE, i * SPRITE_SIZE));
 					universe.addGameEntity(new HolyGrailBonus(canvas,j * SPRITE_SIZE, i * SPRITE_SIZE));
 				}
+				if (tab[i][j] == 5) {
+					universe.addGameEntity(new Floor(canvas, j * SPRITE_SIZE, i * SPRITE_SIZE));
+					Ghost myGhost;
+					GameMovableDriverDefaultImpl ghostDriv = new GhostMovableDriver();
+					MoveStrategyRandom ranStr = new MoveStrategyRandom();
+					ghostDriv.setStrategy(ranStr);
+					ghostDriv.setmoveBlockerChecker(moveBlockerChecker);
+					myGhost = new Ghost(canvas,j * SPRITE_SIZE, i * SPRITE_SIZE);
+					myGhost.setDriver(ghostDriv);
+					ghosts.add(myGhost);
+					targets.add(myGhost);
+				}
 			}
 		}
-
+		for (Ghost g : ghosts){
+			universe.addGameEntity(g);
+		}
 		
 		GameSoldierObserver obs = new GameSoldierObserver(universe);
 
@@ -140,6 +159,11 @@ public class GameLevelOne extends GameLevelDefaultImpl {
 		player2.setDriver(driver2);
 		universe.addGameEntity(player2);
 		targets.add(player2);
+		
+		DisplayBarEntity displayBar = new DisplayBarEntity(canvas);
+		displayBar.addPlayer(player1, "images/linkAvatar.gif");
+		displayBar.addPlayer(player2, "images/link2Avatar.gif");
+		universe.addGameEntity(displayBar);		
 		
 		obs.setTargets(targets);
 	}

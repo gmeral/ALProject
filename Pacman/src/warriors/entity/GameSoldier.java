@@ -219,5 +219,16 @@ public class GameSoldier extends GameMovable implements GameEntity, Drawable, Ov
 		maxInvincibleTimer = invincibleTimer = timer;
 	}
 
+	public int getHealth() {
+		return soldier.getHealth();
+	}
 
+	public int getMaxHealth() {
+		return soldier.getMaxHealth();
+	}
+
+	public int getNbRemainingStrike() {
+		return soldier.getNbRemainingStrike();
+		
+	}
 }

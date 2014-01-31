@@ -45,7 +45,7 @@ public class SoldierProxy extends AbstractObservableUnit {
 			dmg = soldier.strike();
 		} catch (BrokenItemException e) {
 			soldier = e.nextItem();
-			dmg = strike();
+			dmg = strike() + e.getStrength();
 		}
 		//notifyStrike(dmg);
 		return dmg;
@@ -137,6 +137,18 @@ public class SoldierProxy extends AbstractObservableUnit {
 	@Override
 	public int getSightRange() {
 		return soldier.getSightRange();
+	}
+
+	public int getHealth() {
+		return soldier.getCurrentHealth();
+	}
+
+	public int getMaxHealth() {
+		return soldier.getMaxHealth();
+	}
+
+	public int getNbRemainingStrike() {
+		return soldier.getNbRemainingStrike();
 	}
 
 }
