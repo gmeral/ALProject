@@ -6,12 +6,16 @@ import warriors.visitor.WarriorsVisitor;
 public class Candle extends AbstractWeapon {
 	
 	public static final int candleHealth  = 1;
-	public static final int CandleStrengthBonus = 0;
-	public static final int CandleDamageReduction  = 0;
-	public static final int CandleSightRangeBonus  = 2;
+	public static final int candleStrengthBonus = 0;
+	public static final int candleDamageReduction  = 0;
+	public static final int candleSightRangeBonus  = 2;
+	public static final int candleHealthBonus  = 0;
 	
 	public Candle(){
-		super(CandleStrengthBonus,CandleDamageReduction, CandleSightRangeBonus);
+		super(candleStrengthBonus,
+				candleDamageReduction,
+				candleSightRangeBonus,
+				candleHealthBonus);
 	}
 	
 

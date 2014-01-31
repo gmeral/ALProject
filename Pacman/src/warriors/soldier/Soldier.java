@@ -11,4 +11,6 @@ public interface Soldier {
 	String getName();
 	void accept(WarriorsVisitor visitor);
 	int getSightRange();
+	int getMaxHealth();
+	int getCurrentHealth();
 }

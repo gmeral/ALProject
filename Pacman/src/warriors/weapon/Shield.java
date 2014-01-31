@@ -10,10 +10,14 @@ public class Shield extends AbstractWeapon {
 	public static final int shieldStrengthBonus = 0;
 	public static final int shieldSightRangeBonus = 0;
 	public static final int shieldDamageReduction  = 1;
+	public static final int shieldHealthBonus  = 0;
 	
 	
 	public Shield(){
-		super(shieldStrengthBonus,shieldDamageReduction, shieldSightRangeBonus);
+		super(shieldStrengthBonus,
+				shieldDamageReduction,
+				shieldSightRangeBonus,
+				shieldHealthBonus);
 	}
 	
 

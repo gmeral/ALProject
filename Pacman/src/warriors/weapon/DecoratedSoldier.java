@@ -95,5 +95,12 @@ abstract class DecoratedSoldier implements Soldier, ArmedSoldier{
 	public int itemHealth(){
 		return weaponHealth;
 	}
-
+	
+	public int getMaxHealth(){
+		return item.getMaxHealthBonus() + soldier.getMaxHealth();
+	}
+	
+	public int getCurrentHealth(){
+		return item.getCurrentHealthBonus() + soldier.getCurrentHealth();
+	};
 }

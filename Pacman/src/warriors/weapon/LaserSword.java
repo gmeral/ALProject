@@ -9,10 +9,14 @@ public class LaserSword extends AbstractWeapon {
 	public static final int laserSwordDamageReduction  = 0;
 	public static final int laserSwordsightRangeBonus  = 0;
 	public static final int laserSwordHealth = 5;
+	public static final int laserSwordHealthBonus  = 0;
 	
 	
 	public LaserSword() {
-		super(laserSwordStrengthBonus, laserSwordDamageReduction, laserSwordsightRangeBonus);
+		super(laserSwordStrengthBonus,
+				laserSwordDamageReduction, 
+				laserSwordsightRangeBonus, 
+				laserSwordHealthBonus);
 	}
 
 
