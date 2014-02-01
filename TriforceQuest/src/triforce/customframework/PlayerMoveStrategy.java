@@ -10,7 +10,7 @@ import java.awt.event.KeyEvent;
 
 public class PlayerMoveStrategy extends KeyAdapter implements MoveStrategy {
 	protected SpeedVector speedVector = new SpeedVectorDefaultImpl(new Point(0,1),0);
-	private static final int DEFAULT_SPEED = 8;
+	private static final int DEFAULT_SPEED = TriforceGameImpl.GLOBAL_SPRITE_SIZE/2;
 	private final int  right, left,up, down;
 
 

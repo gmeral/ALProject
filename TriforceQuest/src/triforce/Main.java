@@ -12,8 +12,8 @@ public class Main {
 		TriforceGameImpl g = new TriforceGameImpl(); //redefine game size
 		ArrayList<GameLevel> levels = new ArrayList<GameLevel>();
 
-		levels.add(new GameLevelTwo(g));
 		levels.add(new GameLevelOne(g));
+		levels.add(new GameLevelTwo(g));
 		
 		g.setLevels(levels);
 		gameTheme.loop();
