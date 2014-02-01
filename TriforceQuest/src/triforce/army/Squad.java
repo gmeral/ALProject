@@ -50,7 +50,7 @@ public class Squad extends AbstractObservableUnit {
 	}
 
 
-	public int strike() {
+	public int strike() throws BrokenItemException {
 		int strength = 0;
 		for (int i=0 ; i<Units.size() ; i++){
 			strength += Units.get(i).strike();

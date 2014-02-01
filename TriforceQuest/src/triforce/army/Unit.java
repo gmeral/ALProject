@@ -10,7 +10,7 @@ import triforce.weapon.Weapon;
 public interface Unit {
 	//Soldier interface
 	int parry(int damages) throws DeadSoldierException, BrokenItemException;
-	int strike();
+	int strike() throws BrokenItemException;
 	int getSightRange();
 	String toString();
 	String getName();

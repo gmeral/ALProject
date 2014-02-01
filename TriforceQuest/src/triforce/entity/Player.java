@@ -13,6 +13,7 @@ import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import triforce.SoundPlayer;
 import triforce.army.Unit;
 import triforce.customframework.TriforceGameImpl;
 import triforce.customframework.PlayerSpriteManagerImpl;
@@ -78,14 +79,19 @@ public class Player extends GameMovable implements GameEntity, Drawable, Overlap
 			hurtFrames = 4;
 			int dmg = 0;
 			try {
+				SoundPlayer.HurtSound();
 				dmg = soldier.parry(damages);
+				if(dmg == 0)
+					SoundPlayer.ShieldBlockSound();
 			} catch (DeadSoldierException e) {
+				SoundPlayer.DeathSound();
 				soldier = new InfantryMan();
 				soldier.attache(obs);
 				spriteState = "";
 				setPosition(initPosition);
 				return dmg;
 			} catch (BrokenItemException e) {
+				SoundPlayer.BrokenShieldSound();
 				dmg = e.getStrength();
 				soldier.notifyBrokenShield(this);
 			}
@@ -96,7 +102,12 @@ public class Player extends GameMovable implements GameEntity, Drawable, Overlap
 
 	@Override
 	public int strike() {
-		int strength = soldier.strike();
+		int strength = 0;
+		try {
+			strength = soldier.strike();
+		} catch (BrokenItemException e) {
+			SoundPlayer.BrokenSwordSound();
+		}
 		if (strength > 0)
 			soldier.notifyStrike(this, strength);
 		return strength;

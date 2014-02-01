@@ -40,13 +40,14 @@ public class SoldierProxy extends AbstractObservableUnit {
 	}
 
 	@Override
-	public int strike() {
+	public int strike() throws BrokenItemException {
 		int dmg;
 		try {
 			dmg = soldier.strike();
 		} catch (BrokenItemException e) {
 			soldier = e.nextItem();
 			dmg = strike() + e.getStrength();
+			throw e;
 		}
 		//notifyStrike(dmg);
 		return dmg;
