@@ -42,25 +42,24 @@ public abstract class AbstractTriforceLevel extends GameLevelDefaultImpl  {
 	private static final int MINIMUM_DELAY_BETWEEN_GAME_CYCLES = 40;
 	public static final int SPRITE_SIZE = TriforceGameImpl.GLOBAL_SPRITE_SIZE;
 	boolean stopGameLoop;
-	
+
 	/* framework */
 	protected Canvas canvas;
 	OverlapProcessor overlapProcessor;
 	MoveBlockerChecker moveBlockerChecker;
 	TriforceOverlapRules overlapRules;
-	
+
 	/*triforce game special*/
 	PlayerObserver obs ;
 	List<GameMovable> targets = new ArrayList();
 	Player player1;
 	Player player2;
-	
+
 	public AbstractTriforceLevel(Game g) {
 		super(g);
 	}
 
-
-	protected void initGame(int xP1, int yP1, int xP2, int yP2) {
+	protected void initVariables(){
 		overlapProcessor = new OverlapProcessorDefaultImpl();
 
 		moveBlockerChecker = new MoveBlockerCheckerDefaultImpl();
@@ -75,9 +74,12 @@ public abstract class AbstractTriforceLevel extends GameLevelDefaultImpl  {
 
 		gameBoard = new GameUniverseViewPortDefaultImpl(canvas, universe);
 		((CanvasDefaultImpl) canvas).setDrawingGameBoard(gameBoard);
-		
+	}
+
+	protected void initPlayers(int xP1, int yP1, int xP2, int yP2) {
+
 		obs = new PlayerObserver(universe);
-		
+
 		player1 = new Player(canvas, "images/link.gif", obs, xP1 * SPRITE_SIZE, yP1 * SPRITE_SIZE, KeyEvent.VK_NUMPAD0  );
 		GameMovableDriverDefaultImpl driver1 = new GameMovableDriverDefaultImpl();
 		PlayerMoveStrategy keyStr = new PlayerMoveStrategy(KeyEvent.VK_RIGHT, KeyEvent.VK_LEFT, KeyEvent.VK_UP, KeyEvent.VK_DOWN);
@@ -97,7 +99,14 @@ public abstract class AbstractTriforceLevel extends GameLevelDefaultImpl  {
 		canvas.addKeyListener(player2);
 		player2.setDriver(driver2);
 		targets.add(player2);
+
 		obs.setTargets(targets);
+		universe.addGameEntity(player1);
+		universe.addGameEntity(player2);
+
+	}
+
+	protected void initDisplayBar(){
 		DisplayBarEntity displayBar = new DisplayBarEntity(canvas);
 		displayBar.addPlayer(player1, "images/linkAvatar.gif");
 		displayBar.addPlayer(player2, "images/link2Avatar.gif");
@@ -127,7 +136,6 @@ public abstract class AbstractTriforceLevel extends GameLevelDefaultImpl  {
 					universe.addGameEntity(new HolyGrailBonus(canvas,j * SPRITE_SIZE, i * SPRITE_SIZE));
 				}
 				if (tab[i][j] == 5) {
-					System.out.println("aaaaa");
 					universe.addGameEntity(new Floor(canvas, j * SPRITE_SIZE, i * SPRITE_SIZE));
 					Ghost myGhost;
 					GameMovableDriverDefaultImpl ghostDriv = new GhostMovableDriver();
@@ -147,10 +155,8 @@ public abstract class AbstractTriforceLevel extends GameLevelDefaultImpl  {
 					universe.addGameEntity(new CandleBonus(canvas,j * SPRITE_SIZE, i * SPRITE_SIZE));
 				}
 			}
-
-			universe.addGameEntity(player1);
-			universe.addGameEntity(player2);
 		}
+
 		for (Ghost g : ghosts){
 			universe.addGameEntity(g);
 		}
