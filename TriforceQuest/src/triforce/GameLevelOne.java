@@ -50,9 +50,10 @@ public class GameLevelOne extends AbstractTriforceLevel {
 
 	@Override
 	protected void init() {
+		//TODO builder 
 		initVariables();
 		readMap(tab);
-		initPlayers(27,1,1,1);
+		initPlayers(26,1,1,1);
 		initDisplayBar();
 	}
 
