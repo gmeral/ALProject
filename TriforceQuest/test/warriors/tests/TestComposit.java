@@ -71,7 +71,6 @@ public class TestComposit {
 			try {
 				army.parry(army.strike());
 			} catch (BrokenItemException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} 
 			Assert.fail("had to die");

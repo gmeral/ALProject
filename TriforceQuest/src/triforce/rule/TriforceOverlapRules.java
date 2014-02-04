@@ -55,7 +55,7 @@ public class TriforceOverlapRules extends OverlapRulesApplierDefaultImpl {
 
 	public void overlapRule(Player player,ShieldBonus bonus){
 		if(bonus.applyBonus(player)) {
-			SoundPlayer.BonusSound();
+			SoundPlayer.getInstance().BonusSound();
 			player.setSpriteState("shield+");
 			universe.removeGameEntity(bonus);
 		}
@@ -63,7 +63,7 @@ public class TriforceOverlapRules extends OverlapRulesApplierDefaultImpl {
 	
 	public void overlapRule(Player player,CandleBonus bonus){
 		if(bonus.applyBonus(player)) {
-			SoundPlayer.BonusSound();
+			SoundPlayer.getInstance().BonusSound();
 			universe.removeGameEntity(bonus);
 		}
 	}
@@ -75,7 +75,7 @@ public class TriforceOverlapRules extends OverlapRulesApplierDefaultImpl {
 	
 	public void overlapRule(Player player,SwordBonus bonus){
 		if(bonus.applyBonus(player)) {
-			SoundPlayer.BonusSound();
+			SoundPlayer.getInstance().BonusSound();
 			universe.removeGameEntity(bonus);
 		}
 	}
@@ -84,7 +84,7 @@ public class TriforceOverlapRules extends OverlapRulesApplierDefaultImpl {
 		winner = player;
 		player.setSpriteState("win");
 		universe.removeGameEntity(grail);
-		SoundPlayer.WinSound();
+		SoundPlayer.getInstance().WinSound();
 		endOfGame.setValue(true);
 	}
 	

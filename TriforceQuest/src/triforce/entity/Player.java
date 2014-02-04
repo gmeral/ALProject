@@ -79,19 +79,20 @@ public class Player extends GameMovable implements GameEntity, Drawable, Overlap
 			hurtFrames = 4;
 			int dmg = 0;
 			try {
-				SoundPlayer.HurtSound();
 				dmg = soldier.parry(damages);
 				if(dmg == 0)
-					SoundPlayer.ShieldBlockSound();
+					SoundPlayer.getInstance().ShieldBlockSound();
+				else
+					SoundPlayer.getInstance().HurtSound();
 			} catch (DeadSoldierException e) {
-				SoundPlayer.DeathSound();
+				SoundPlayer.getInstance().DeathSound();
 				soldier = new InfantryMan();
 				soldier.attache(obs);
 				spriteState = "";
 				setPosition(initPosition);
 				return dmg;
 			} catch (BrokenItemException e) {
-				SoundPlayer.BrokenShieldSound();
+				SoundPlayer.getInstance().BrokenShieldSound();
 				dmg = e.getStrength();
 				soldier.notifyBrokenShield(this);
 			}
@@ -106,7 +107,7 @@ public class Player extends GameMovable implements GameEntity, Drawable, Overlap
 		try {
 			strength = soldier.strike();
 		} catch (BrokenItemException e) {
-			SoundPlayer.BrokenSwordSound();
+			SoundPlayer.getInstance().BrokenSwordSound();
 		}
 		if (strength > 0)
 			soldier.notifyStrike(this, strength);

@@ -12,6 +12,7 @@ public class PlayerMoveStrategy extends KeyAdapter implements MoveStrategy {
 	protected SpeedVector speedVector = new SpeedVectorDefaultImpl(new Point(0,1),0);
 	private static final int DEFAULT_SPEED = TriforceGameImpl.GLOBAL_SPRITE_SIZE/2;
 	private final int  right, left,up, down;
+	private int nbKeyPressed;
 
 
 	public SpeedVector getSpeedVector() {
@@ -23,28 +24,33 @@ public class PlayerMoveStrategy extends KeyAdapter implements MoveStrategy {
 		left = leftKey;
 		up = upKey;
 		down = downKey;
+		nbKeyPressed = 0;
 	}
 
 	@Override
 	public void keyPressed(KeyEvent event) {
-
 		int keycode = event.getKeyCode();
 		if (keycode == right) {
 			speedVector.setDirection(new Point(1, 0));
 			speedVector.setSpeed(DEFAULT_SPEED);
+			nbKeyPressed++;
 		}
 		if (keycode == left) {
 			speedVector.setDirection(new Point(-1, 0));
 			speedVector.setSpeed(DEFAULT_SPEED);
+			nbKeyPressed++;
 		}
 		if (keycode == up) {
 			speedVector.setDirection(new Point(0, -1));
 			speedVector.setSpeed(DEFAULT_SPEED);
+			nbKeyPressed++;
 		}
 		if (keycode == down) {
 			speedVector.setDirection(new Point(0, 1));
 			speedVector.setSpeed(DEFAULT_SPEED);
+			nbKeyPressed++;
 		}
+		
 	}
 
 
@@ -52,7 +58,9 @@ public class PlayerMoveStrategy extends KeyAdapter implements MoveStrategy {
 	public void keyReleased(KeyEvent event) {
 		int keycode = event.getKeyCode();
 		if (keycode == right || keycode == left || keycode == up || keycode == down) {
-			speedVector.setSpeed(0);
+			nbKeyPressed--;
+			if(nbKeyPressed == 0)
+				speedVector.setSpeed(0);
 		}
 	}
 }

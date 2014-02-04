@@ -80,7 +80,7 @@ public abstract class AbstractTriforceLevel extends GameLevelDefaultImpl  {
 
 		obs = new PlayerObserver(universe);
 
-		player1 = new Player(canvas, "images/link.gif", obs, xP1 * SPRITE_SIZE, yP1 * SPRITE_SIZE, KeyEvent.VK_NUMPAD0  );
+		player1 = new Player(canvas, "images/link.gif", obs, xP1 * SPRITE_SIZE, yP1 * SPRITE_SIZE, KeyEvent.VK_M  );
 		GameMovableDriverDefaultImpl driver1 = new GameMovableDriverDefaultImpl();
 		PlayerMoveStrategy keyStr = new PlayerMoveStrategy(KeyEvent.VK_RIGHT, KeyEvent.VK_LEFT, KeyEvent.VK_UP, KeyEvent.VK_DOWN);
 		driver1.setStrategy(keyStr);
